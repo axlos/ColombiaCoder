@@ -33,6 +33,18 @@ class JobsController < ApplicationController
   def new
     session[:job_params] ||= {}
     @job = Job.new(session[:job_params])
+    # solo si el usuario esta autenticado
+    if user_signed_in?
+      # verificar si existe alguna oferta laboral por defecto para traer la informacion de la empresa
+      job_last = current_user.jobs.first
+      if job_last
+        @job.company_description = job_last.company_description
+        @job.company_logo = job_last.company_logo
+        @job.company_name = job_last.company_name
+        @job.company_web_site = job_last.company_web_site
+      end 
+    end
+    
   end
   
   # POST /jobs

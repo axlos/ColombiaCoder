@@ -2,6 +2,18 @@
 <div class="content">
 	<div class="row">
 		<div class="span12">
+			<ul class="breadcrumb">
+				<% if user_signed_in? %>
+					<li>
+						<%= link_to "Mis ofertas laborales", admin_jobs_path %><span class="divider">/</span>
+					</li>
+				<% end %>
+				<li class="active">
+					Editar
+				</li>
+			</ul>
+		</div>
+		<div class="span12">
 			<div class="row-fluid">
 				<%= render :partial => 'form' %>
 			</div>

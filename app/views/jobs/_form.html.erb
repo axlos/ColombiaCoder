@@ -8,6 +8,12 @@
 	<div class="control-group">
 		<label class="string optional control-label">Logo de la empresa</label>
 		<div class="controls">
+			<% if @job.company_logo %>
+				<div class="alert alert-block">
+				  <a class="close" data-dismiss="alert" href="#">×</a>
+				  El logo de la empresa ya ha sido cargado!, puede cambiar la imagen haciendo click en "Seleccionar archivo"". 
+				</div>
+			<% end %>
 			<%= f.file_field :company_logo %>
             <p class="help-block">
             	Logotipo de la empresa (GIF, JPG, PNG)
