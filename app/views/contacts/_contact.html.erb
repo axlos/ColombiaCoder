@@ -1,0 +1,48 @@
+<div class="page-header">
+	<h3>Informacion de contacto</h3>
+</div>
+<address>
+	<% if contact.full_name.present? %>
+		<strong><%= contact.full_name %></strong>
+	<% else  %>
+		<em class="muted">Sin nombre de contacto</em>
+	<% end %>
+	<br>
+	<% if contact.email.present? %>
+		<%= link_to contact.email, "mailto: #{@contact.email}" %>
+	<% else  %>
+		<em class="muted">Sin email</em>
+	<% end %>
+	<br>
+	<% if contact.phone.present? %>
+		<abbr title="Phone">Tel.</abbr> <%= @contact.phone %>
+	<% else  %>
+		<em class="muted">Sin teléfono</em>
+	<% end %>
+</address>
+<address>
+	<% if contact.company.present? %>
+		<strong><%= contact.company %></strong>
+	<% else  %>
+		<em class="muted">Sin información de la empresa</em>
+	<% end %>
+	<br>
+	<% if contact.web_site.present? %>
+		<%= link_to contact.web_site, "#{@contact.web_site}" %>
+	<% else  %>
+		<em class="muted">Sin sitio web</em>
+	<% end %>
+	<br>
+	<% if contact.street_address.present? %>
+		<%= contact.street_address %>
+	<% else  %>
+		<em class="muted">Sin dirección</em>
+	<% end %>
+	<br>
+	<% if contact.geoname.present? %>
+		<%= contact.geoname %>
+	<% else  %>
+		<em class="muted">Sin localización de la empresa</em>
+	<% end %>
+</address>
+<%= link_to 'Editar informacion de contacto', edit_contact_path(contact.id) %>

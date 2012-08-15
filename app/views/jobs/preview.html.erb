@@ -1,0 +1,38 @@
+<div class="content">
+	<div class="row">
+		<% if user_signed_in? %>
+			<div class="span12">
+				<p class="pull-left">
+					<%= link_to ' Ver todas', admin_jobs_path, :class => 'icon-circle-arrow-left' %>
+				</p>
+			</div>
+		<% end %>
+		<div class="span12">
+			<ul class="breadcrumb">
+				<li>
+					<%= link_to 'Crear una oferta de empleo', new_job_path %><span class="divider">/</span>
+				</li>
+				<li class="active">
+					Vista previa<span class="divider">/</span>
+				</li>
+			</ul>
+		</div>
+		<div class="span12">
+			<div class="alert alert-info">
+				<h3>Vista previa de su oferta laboral</h3>
+				<p>
+					Aquí está una vista previa de su oferta laboral. Puede editar nuevamente la informacion, luego puedes dar click en "Publicar oferta laboral" cuando estás satisfecho.
+				</p>
+				<p>
+					<%= form_tag(@job) do -%>
+						<%= link_to 'Continuar editando', new_job_path(@job), :class => 'btn btn-primary' %>
+						<%= button_tag(type: 'submit', :class => 'btn btn-success', :name => 'post_button') do %>
+						    <i class=" icon-pencil"></i> Publicar oferta
+						<% end %>
+					<% end -%>
+				</p>
+			</div>
+		</div>
+		<%= render @job %>
+	</div>
+</div>

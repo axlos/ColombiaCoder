@@ -1,0 +1,82 @@
+<%= simple_form_for @job, :validate => true, :html => { :class => 'form-horizontal', :multipart => true } do |f| %>
+<fieldset>
+	<legend>
+		Informacion de la empresa
+	</legend>
+	<%= f.input :company_name, :input_html => { :class => 'span12' } %>
+	<%= f.input :company_web_site, :input_html => { :class => 'span12' }, :hint => 'ej. http://www.colombiandeveloper.com' %>
+	<div class="control-group">
+		<label class="string optional control-label">Logo de la empresa</label>
+		<div class="controls">
+			<%= f.file_field :company_logo %>
+            <p class="help-block">
+            	Logotipo de la empresa (GIF, JPG, PNG)
+			</p>
+		</div>
+	</div>
+	<%= f.input :company_description, :input_html => { :class => 'span12', :rows => 7 } %>
+</fieldset>
+<fieldset>
+	<legend>
+		Informacion de la oferta laboral
+	</legend>
+	<%= f.input :job_title, :input_html => { :class => 'span12' } %>
+	<div class="control-group">
+		<label class="string optional control-label" for="job_geoname">Ciudad</label>
+		<div class="controls">
+			<%= text_field_tag 'job[geoname]', @job.geoname, :class => 'span12' %>
+			<%= hidden_field_tag 'job[geoname_id]', @job.geoname_id %>
+		</div>
+	</div>
+	<%= f.input :job_description, :input_html => { :class => 'span12', :rows => 7 } %>
+	<div class="control-group">
+		<div class="controls">
+			<label class="checkbox">
+                <%= check_box_tag 'no_experience_required', nil, @job.no_experience_required == true %>
+                <%= hidden_field_tag 'job[no_experience_required]', @job.no_experience_required %>
+                Es una oferta laboral para candidatos SIN experiencia?
+            </label>
+            <p class="help-block">
+            	ej. estudiantes, recien graduados, etc.
+			</p>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<div class="controls">
+			<label class="radio"><%= radio_button_tag 'job[salary_negotiable]', true, @job.salary_negotiable == true %>
+				Salario a convenir</label>
+			<label class="radio"><%= radio_button_tag 'job[salary_negotiable]', false, @job.salary_negotiable == false %>
+				O, especifique un rango salarial</label>
+			<div class="control-group">
+				<label class="control-label">Salario</label>
+				<div class="controls">
+				  <%= content_tag(:div, '', :id => 'slider-range')%>
+	              <p class="help-block">
+						<%= content_tag(:span, '', :id => 'range-ini')%> - <%= content_tag(:span, '', :id => 'range-fin')%>
+						<%= hidden_field_tag 'job[salary_range_ini]', @job.salary_range_ini %>
+						<%= hidden_field_tag 'job[salary_range_fin]',  @job.salary_range_fin %>
+				  </p>
+            	</div>
+            </div>
+		</div>
+	</div>
+	<%= f.association :job_types, :as => :check_boxes %>
+	<div class="control-group">
+		<label class="control-label">Como aplicar</label>
+		<div class="controls">
+			<label class="radio"> <%= radio_button_tag 'job[resume_directly]', true, @job.resume_directly == true %>
+				Permitir que los candidatos adjunten su hoja de vida y se envie directamente a un email</label>
+			<%= f.input :email_address, :input_html => { :class => 'span12' } %>
+			<label class="radio"> <%= radio_button_tag 'job[resume_directly]', false, @job.resume_directly == false %>
+				O, detalle como aplicar a la oferta laboral:</label>
+			<%= f.input :application_details, :input_html => { :class => 'span12', :rows => 4, :disabled => @job.resume_directly }%>
+		</div>
+	</div>
+</fieldset>
+<div class="form-actions">
+	<%= button_tag(type: 'submit', class: 'btn btn-primary', :name => 'preview_button') do %>
+	    <i class=" icon-pencil"></i> <%= @job.new_record? ? 'Vista previa' : 'Aceptar' %>
+	<% end %>
+</div>
+<% end %>

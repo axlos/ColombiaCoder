@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  company_name: MyString
+  company_web_site: MyString
+  company_logo_image_url: MyString
+  company_description: MyText
+  job_title: MyString
+  job_description: MyText
+  city: 
+  salary_negotiable: false
+  salary_range_ini: 1
+  salary_range_fin: 1
+  experience_required: false
+  resume_directly: false
+  email_address: MyString
+  application_details: MyText
+
+two:
+  company_name: MyString
+  company_web_site: MyString
+  company_logo_image_url: MyString
+  company_description: MyText
+  job_title: MyString
+  job_description: MyText
+  city: 
+  salary_negotiable: false
+  salary_range_ini: 1
+  salary_range_fin: 1
+  experience_required: false
+  resume_directly: false
+  email_address: MyString
+  application_details: MyText

@@ -1,0 +1,37 @@
+<%- model_class = @job.class -%>
+<div class="content">
+	<div class="row">
+		<div class="span12">
+			<ul class="breadcrumb">
+				<li class="active">
+					Crear una oferta de empleo<span class="divider">/</span>
+				</li>
+				<li>
+					Vista previa<span class="divider">/</span>
+				</li>
+			</ul>
+			<div class="alert alert-success">
+				<h3>Por que publicar en colombiandeveloper?</h3>
+				<br />
+				<ul>
+					<li>
+						Publicacion de la oferta laboral durante 30 días en colombiandeveloper.com.
+					</li>
+					<li>
+						Un correo electrónico automático a nuestra lista de suscripción de solicitantes de empleo.
+					</li>
+					<li>
+						Un portal dedicado exclusivamente a encontrar talentos en software en Colombia.
+					</li>
+				</ul>
+			</div>
+			<h2>Listo para encontrar los mejores talentos?</h2>
+			<br/>
+		</div>
+		<div class="span12">
+			<div class="row-fluid">
+				<%= render :partial => 'form' %>
+			</div>
+		</div>
+	</div>
+</div>

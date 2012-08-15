@@ -1,0 +1,20 @@
+<%= simple_form_for @contact, :validate => true, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :full_name, :class => 'text_field' %>
+  <%= f.input :email, :class => 'text_field' %>
+  <%= f.input :company, :class => 'text_field' %>
+  <%= f.input :web_site, :class => 'text_field', :hint => 'ej. http://www.colombiandeveloper.com' %>
+  <div class="control-group">
+	<label class="string optional control-label" for="contact_geoname">Ciudad</label>
+	<div class="controls">
+		<%= text_field_tag 'contact[geoname]', @contact.geoname %>
+		<%= hidden_field_tag 'contact[geoname_id]', @contact.geoname_id %>
+	</div>
+  </div>
+  <%= f.input :street_address, :class => 'text_field' %>
+  <%= f.input :phone, :class => 'text_field' %> 
+  
+  <div class="form-actions">
+  	<%= f.button :submit, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")), admin_jobs_path, :class => 'btn' %>
+  </div>
+<% end %>

@@ -1,0 +1,77 @@
+<div class="span12">
+	<div class="row-fluid">
+		<div class="span10">
+			<h2><%= job.job_title.titleize %></h2>
+			<dl class="dl-horizontal">
+				<dt>
+					<strong>Empresa:</strong>
+				</dt>
+				<dd>
+					<%= link_to job.company_name, job.company_web_site %>
+				</dd>
+				<dt>
+					<strong>Localizacion:</strong>
+				</dt>
+				<dd>
+					<%= job.geoname %>
+				</dd>
+				<% if job.job_types.length > 0 %>
+				<dt>
+					<strong>Tipo de contrato:</strong>
+				</dt>
+				<dd>
+					<%= job.job_types.to_sentence %>
+				</dd>
+				<% end%>
+				<dt>
+					<strong>Salario:</strong>
+				</dt>
+				<% if job.salary_negotiable %>
+				<dd>
+					Negociable
+				</dd>
+				<% else %>
+				<dd>
+					<%= number_to_currency(job.salary_range_ini).concat(' - ').concat(number_to_currency(job.salary_range_fin)) %>
+				</dd>
+				<% end%>
+			</dl>
+		</div>
+		<div class="span2">
+			<% if job.company_logo? %>
+			<ul class="thumbnails">
+				<li class="span12">
+					<div class="thumbnail">
+						<%= image_tag job.company_logo.url(:thumb) %>
+					</div>
+				</li>
+			</ul>
+			<% end %>
+		</div>
+	</div>
+	<br/>
+</div>
+<div class="span12">
+	<h3>Descripcion de la oferta</h3>
+	<p>
+		<%= simple_format(job.job_description) %>
+	</p>
+	<br/>
+</div>
+<div class="span12">
+	<h3>Acerca de <%= job.company_name %></h3>
+	<p>
+		<%= simple_format(job.company_description) %>
+	</p>
+	<br/>
+</div>
+<% unless job.resume_directly %>
+<div class="span12">
+	<div class="well">
+		<h3>Como aplicar a la oferta laboral</h3>
+		<p>
+			<%= job.application_details %>
+		</p>
+	</div>
+</div>
+<% end %>
