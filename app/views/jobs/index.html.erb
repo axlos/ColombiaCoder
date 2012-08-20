@@ -1,0 +1,66 @@
+<%= simple_form_for @job, :method => :get do |f| %>
+<div class="row-fluid">
+	<div class="span9">
+		<div class="alert alert-success">
+			<i class="icon-search"></i> <%= pluralize(@search_total, 'oferta laboral encontrada', 'ofertas laborales encontradas') %>
+		</div>
+		<% @jobs.each do |job| %>
+			<%= job_preview(job) %>
+		<% end %>
+		<!-- Paginacion de resultados -->
+		<% if @jobs.total_pages > 1 %>
+			<!-- TODO: Cuando el numero de paginadores supera el limite de la pantalla -->
+			<div class="pagination">
+				<ul>
+					<% unless @jobs.first_page? %>
+						<li><%= link_to '«', jobs_path(request.parameters.merge({:page => @jobs.previous_page})) %></li>
+					<% end %>
+					<% @jobs.total_pages.times do |page| %>
+						<li <%=  'class=active' if (page + 1) == params[:page].to_i %>><%= link_to (page + 1), jobs_path(request.parameters.merge({:page => page + 1})) %></li>
+					<% end %>
+					<% unless @jobs.last_page? %>
+						<li><%= link_to '»', jobs_path(request.parameters.merge({:page => @jobs.next_page})) %></li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+	</div>
+	<div class="span3">
+		<div class="well">
+			<strong>Buscar ofertas laborales</strong>
+			<br/>
+			<br/>
+			<!-- Localizacion -->
+			<%= text_field_tag :job_geoname, params[:job_geoname] %>
+			<%= hidden_field_tag :job_geoname_id, params[:job_geoname_id] %>
+			<%= f.association :job_types, :as => :check_boxes, :label => 'Tipo de contrato:' %>
+			<!-- Rango salarial -->
+			<hr/>
+			<%= content_tag(:label, 'Salario:')%>
+			<label class="radio">
+				<%= radio_button_tag 'job[salary_negotiable]', true, (params[:job][:salary_negotiable] == 'true') || true %><%= content_tag(:label, 'Negociable', )%>
+			</label>
+			<label class="radio">
+				<%= radio_button_tag 'job[salary_negotiable]', false, params[:job][:salary_negotiable] == 'false' %><%= content_tag(:label, 'Rango salarial', )%>
+			</label>
+			<%= content_tag(:div, '', :id => :slider_range)%>
+			<br/>
+			<%= content_tag(:span, '', :id => :range_ini)%> - <%= content_tag(:span, '', :id => :range_fin)%>
+			<%= hidden_field_tag :job_salary_range_ini, params[:job_salary_range_ini] || 2000000 %>
+			<%= hidden_field_tag :job_salary_range_fin,  params[:job_salary_range_fin] || 3500000 %>
+			<br/>
+			<br/>
+			<!-- Order de busqueda -->
+			<%= hidden_field_tag :order,  params[:order] || 'last' %>
+			<!-- Nombre de empresa -->
+			<%= hidden_field_tag :company_name,  params[:company_name] %>
+			<%= button_tag(type: 'submit', class: 'btn btn-primary', :name => nil) do %>
+			    <i class=" icon-pencil"></i> Aceptar
+			<% end %>
+			<div class="pull-right">
+				<%= link_to 'Ver todas' %>
+			</div>
+		</div>
+	</div>
+</div>
+<% end %>
