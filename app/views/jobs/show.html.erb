@@ -1,14 +1,17 @@
 <div class="content">
 	<div class="row">
-		<% if user_signed_in? %>
+		<% if user_signed_in? and current_user.id == @job.user_id %>
 			<div class="span12">
 				<ul class="breadcrumb">
 					<li>
-						<%= link_to "Mis ofertas laborales", admin_jobs_path %><span class="divider">/</span>
-					</li>
-					<li class="active">
-						Vista previa
-					</li>
+					<%= link_to "Mis ofertas laborales", admin_jobs_path %><span class="divider">/</span>
+				</li>
+				<li>
+					<%= link_to "Crear una oferta de empleo", edit_job_path %><span class="divider">/</span>
+				</li>
+				<li class="active">
+					Vista previa
+				</li>
 				</ul>
 			</div>
 			<div class="span12">

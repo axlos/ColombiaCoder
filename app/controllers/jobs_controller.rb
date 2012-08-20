@@ -4,7 +4,37 @@ class JobsController < ApplicationController
 
   # GET /jobs
   def index
-    @jobs = Job.all
+    # contruir objeto para inicial el formulario
+    params[:job]||= {}
+    @job = Job.new(params[:job])
+    # Si no hay tipos de trabajo seleccionados, selecciona todos por defecto
+    @job.job_types = JobType.all unless params[:job][:job_type_ids].present?
+    
+    search = Job.search do
+      # Localizacion
+      with(:geoname_id, params[:job_geoname_id]) if params[:job_geoname_id].present?
+      # Salario negociable
+      with(:salary_negotiable, params[:job][:salary_negotiable] == 'true') if params[:job][:salary_negotiable].present?
+      # Rango de salarios
+      with(:salary_range_ini).greater_than(params[:job_salary_range_ini]) if params[:job][:salary_negotiable] == 'false' and params[:job_salary_range_ini].present?
+      with(:salary_range_fin).less_than(params[:job_salary_range_fin]) if params[:job][:salary_negotiable] == 'false' and params[:job_salary_range_fin].present?
+      # solo ofertas activas
+      with(:status, 2)
+      # tipos de contrato
+      with(:job_type_ids, params[:job][:job_type_ids]) if params[:job][:job_type_ids].present?
+      # por nombre de empresa
+      with(:company_name, params[:company_name]) if params[:company_name].present?
+      # Si no se requiere experiencia
+      with(:no_experience_required, params[:no_experience_required]) if params[:no_experience_required].present?
+      # ordernar por fecha de creacion
+      order_by :created_at, :desc if params[:order] == 'last'
+      order_by :created_at, :asc if params[:order] == 'urgent'
+      # paginacion
+      paginate :per_page => 25
+      paginate :page => params[:page]
+    end
+    @jobs = search.results
+    @search_total = search.total
   end
   
   # GET /jobs
@@ -18,21 +48,15 @@ class JobsController < ApplicationController
   def show
     @job = Job.find(params[:id])  
   end
-  
-  # GET /jobs/
-  def preview
-    @job = session[:job_params]  
-  end
 
   # GET /jobs/1/edit
   def edit
     @job = Job.find(params[:id])
   end
   
-  # GET /jobs/new
+  # GET /jobs/new@job = session[:job_params]
   def new
-    session[:job_params] ||= {}
-    @job = Job.new(session[:job_params])
+    @job = Job.new
     # solo si el usuario esta autenticado
     if user_signed_in?
       # verificar si existe alguna oferta laboral por defecto para traer la informacion de la empresa
@@ -42,28 +66,35 @@ class JobsController < ApplicationController
         @job.company_logo = job_last.company_logo
         @job.company_name = job_last.company_name
         @job.company_web_site = job_last.company_web_site
-      end 
+        if job_last.application_details
+          @job.application_details = job_last.application_details
+        end
+      end
+      if current_user.email
+        # verificar si el usuario tiene informacion de contacto
+        @job.resume_directly = true
+        @job.email_address = current_user.contact.email
+        @job.geoname_id = current_user.contact.geoname_id
+        @job.geoname = current_user.contact.geoname
+      end
     end
     
   end
   
   # POST /jobs
   def create
-    # merge entre los parametros enviados como post y los valores de session si existen
-    session[:job_params].deep_merge!(params[:job]) if params[:job]
-    # crear nuevo job
-    @job = Job.new(session[:job_params])
-    # previsualizar la oferta de empleo
-    if params[:preview_button]
-      render "preview"
-    else
-      @job.user = current_user
-      if @job.save
-        session[:job_params] = session[:job_auth] = nil
-        redirect_to admin_jobs_path(@job.id), notice: 'Oferta laboral creada.'
+    # Referenciar el usuario en session
+    @job = Job.new(params[:job])
+    @job.user = current_user
+    if @job.save
+      # Previsualizar la oferta de empleo
+      if params[:preview_button]
+        redirect_to :action => 'show', :id => @job.id
       else
-        render action: "new"
+        redirect_to admin_jobs_path(@job.id), notice: 'Oferta laboral creada.'
       end
+    else
+      render action: "new"
     end
   end
 

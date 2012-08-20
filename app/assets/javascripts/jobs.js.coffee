@@ -15,33 +15,41 @@ $("[name='job[resume_directly]']").bind 'click', (event) =>
     true
 
 # Aplicar JQuery-UI lider
-$("#slider-range").slider({
+$("#slider_range").slider({
       range: true,
       min: 1000000,
-      max: 15000000,
+      max: 10000000,
       step: 500000,
       values: [$("#job_salary_range_ini").val(), $("#job_salary_range_fin").val()],
       slide: (event, ui ) ->
-        $("#range-ini").text(ui.values[0]).formatCurrency()
-        $("#range-fin").text(ui.values[1]).formatCurrency()
+        # Visualizar los rangos salariales en los label
+        if ui.values[0] <= (1000000)
+          $("#range_ini").text('Menos $1,000,000')
+        else
+          $("#range_ini").text(ui.values[0]).formatCurrency({roundToDecimalPlace: 0})
+        if ui.values[1] >= (10000000)
+          $("#range_fin").text('Mas $10,000,000')
+        else
+          $("#range_fin").text(ui.values[1]).formatCurrency({roundToDecimalPlace: 0})
+        
         $("#job_salary_range_ini").val(ui.values[0])
         $("#job_salary_range_fin").val(ui.values[1])
 });
 
 # Formato de moneda para el slider      
-$("#range-ini").text($("#slider-range").slider("values", 0)).formatCurrency()
-$("#range-fin").text($("#slider-range").slider("values", 1)).formatCurrency()
+$("#range_ini").text($("#slider_range").slider("values", 0)).formatCurrency({roundToDecimalPlace: 0})
+$("#range_fin").text($("#slider_range").slider("values", 1)).formatCurrency({roundToDecimalPlace: 0})
 
 # funtion para habilitar o deshabilitar slider
 Salary_negotiable_slider = (checked) ->
   if checked is "false"
-    $('#slider-range').slider("enable")
-    $("#range-ini").attr('class', "");
-    $("#range-fin").attr('class', "");
+    $('#slider_range').slider("enable")
+    $("#range_ini").attr('class', "");
+    $("#range_fin").attr('class', "");
   else
-    $('#slider-range').slider("disable")
-    $("#range-ini").attr('class', "muted");
-    $("#range-fin").attr('class', "muted");
+    $('#slider_range').slider("disable")
+    $("#range_ini").attr('class', "muted");
+    $("#range_fin").attr('class', "muted");
 
 # Evento para habilitar y deshabilitar salario negociable
 $("[name='job[salary_negotiable]']").bind 'click', (event) =>
@@ -89,6 +97,10 @@ $('#job_geoname').autocomplete({
   ,select: (event, ui) ->
     # Set el geonameId data json a el hidden que guardara el valor
     $("#job_geoname_id").val(ui.item.id)
+  ,change: (event, ui) ->
+    if ui.item is null
+      # Si no ha seleccionado ningun geoname, borrar el valor para no enviar nada al servi
+      $("#job_geoname_id").val(null)
 })
 
 # Depende del valor que seleccione del checkbox cambia el hidden para ser guardado
@@ -97,4 +109,6 @@ $("#no_experience_required").bind 'click', (event) =>
 
 
 # autocomplete de tecnologias, ver: http://www.linkedin.com/ta/skill
-$("#mytags").tagit();
+#$("#mytags").tagit();
+
+# Aplica para la GUI de busquedas

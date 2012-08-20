@@ -6,10 +6,10 @@
 		</div>
 		<form class="well form-search">
 			<div class="input-prepend">
-				<input type="text" class="input-xlarge search-query" placeholder="Tecnologia, ej. java"><span class="add-on"><i class="icon-search"></i></span>
+				<span class="add-on"><i class="icon-search"></i></span><%= text_field_tag 'job[geoname]', '', :class => 'input-xlarge search-query', :placeholder=>'ej. java' %>
 			</div>
 			<div class="input-prepend">
-				<input type="text" class="input-xlarge search-query" placeholder="Localizacion, ej. bogota"><span class="add-on"><i class="icon-search"></i></span>
+				<span class="add-on"><i class="icon-search"></i></span><%= text_field_tag 'job[geoname]', '', :class => 'input-xlarge search-query', :placeholder=>'ej. Bogotá, Bogotá D.C., Colombia' %>
 			</div>
 			<button type="submit" class="btn btn-primary">
 				Buscar
@@ -31,7 +31,7 @@
 				</div>
 				<%= jobs(@presenter.last_jobs) %>
 				<p class="pull-right">
-					<a href=""> Mas ofertas urgentes...</a>
+					<%= link_to 'Mas ofertas urgentes...', jobs_path(:order => 'urgent') %>
 				</p>
 			</div>
 			<div class="span6">
@@ -41,7 +41,7 @@
 				</div>
 				<%= jobs(@presenter.urgent_jobs) %>
 				<p class="pull-right">
-					<a href=""> Mas ofertas de empleo...</a>
+					<%= link_to 'Mas ofertas de empleo...', jobs_path(:order => 'last') %>
 				</p>
 			</div>
 		</div>
@@ -52,10 +52,8 @@
 			<!--Buscadores de talentos -->
 			<h2><i class="icon-bullhorn"></i> Buscadores de talentos!</h2>
 			<p>
-				<form >
-					<span class="help-block">¿Está buscando un desarrollador de software? Bueno, tú has venido al lugar correcto.</span>
-					<%= link_to "Publicar oferta de trabajo", new_job_path, :class => "btn btn-info"%>
-				</form>
+				<span class="help-block">¿Está buscando un desarrollador de software? Bueno, tú has venido al lugar correcto.</span>
+				<%= link_to "Publicar oferta de trabajo", new_job_path, :class => "btn btn-info"%>
 			</p>
 		</div>
 		<!-- Mantengase actualizado -->
@@ -78,28 +76,29 @@
 				</li>
 			</ul>
 		</div>
+		<% unless @presenter.random_company.nil? %>
 		<div>
 			<!-- Empresas destacadas -->
 			<h2><i class="icon-thumbs-up"></i> Empresas destacadas</h2>
-			<p>
-				With a bit of extra markup, it's possible to add any kind of HTML content like headings, paragraphs, or buttons into thumbnails.
-			</p>
 			<ul class="thumbnails">
 				<li class="span12">
 					<div class="thumbnail">
-						<img src="http://placehold.it/160x120" alt="">
+						<div style="text-align: center;">
+							<%= link_to image_tag(@presenter.random_company.company_logo.url(:medium)), jobs_path({:company_name => @presenter.random_company.company_name}) %>
+						</div>
 						<div class="caption">
-							<h5>Google</h5>
+							<h5><%= @presenter.random_company.company_name %></h5>
 							<p>
-								Googlers disfrutan de la libertad para crear la próxima generación de tecnologías web en un ambiente diseñado para fomentar la colaboración, la creatividad, la salud y la felicidad.
+								<%= truncate(strip_tags(@presenter.random_company.company_description), :length => 200) %>
 							</p>
-							<p >
-								<a href="#" >Ver ofertas de google...</a>
+							<p>
+								<%= link_to "Ver ofertas de #{@presenter.random_company.company_name}...", jobs_path({:company_name => @presenter.random_company.company_name}) %>
 							</p>
 						</div>
 					</div>
 				</li>
 			</ul>
 		</div>
+		<% end %>
 	</div>
 </div>

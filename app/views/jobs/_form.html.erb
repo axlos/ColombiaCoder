@@ -8,10 +8,10 @@
 	<div class="control-group">
 		<label class="string optional control-label">Logo de la empresa</label>
 		<div class="controls">
-			<% if @job.company_logo %>
-				<div class="alert alert-block">
+			<% if @job.company_logo? %>
+				<div class="alert alert-info">
 				  <a class="close" data-dismiss="alert" href="#">×</a>
-				  El logo de la empresa ya ha sido cargado!, puede cambiar la imagen haciendo click en "Seleccionar archivo"". 
+				   <i class="icon-info-sign"></i> El logo de la empresa ya ha sido cargado!, puede cambiar la imagen haciendo click en "Seleccionar archivo"". 
 				</div>
 			<% end %>
 			<%= f.file_field :company_logo %>
@@ -30,7 +30,7 @@
 	<div class="control-group">
 		<label class="string optional control-label" for="job_geoname">Ciudad</label>
 		<div class="controls">
-			<%= text_field_tag 'job[geoname]', @job.geoname, :class => 'span12' %>
+			<%= text_field_tag 'job[geoname]', @job.geoname, :class => 'span12', :placeholder=>'ej. Bogotá, Bogotá D.C., Colombia' %>
 			<%= hidden_field_tag 'job[geoname_id]', @job.geoname_id %>
 		</div>
 	</div>
@@ -57,9 +57,9 @@
 			<div class="control-group">
 				<label class="control-label">Salario</label>
 				<div class="controls">
-				  <%= content_tag(:div, '', :id => 'slider-range')%>
+				  <%= content_tag(:div, '', :id => 'slider_range')%>
 	              <p class="help-block">
-						<%= content_tag(:span, '', :id => 'range-ini')%> - <%= content_tag(:span, '', :id => 'range-fin')%>
+						<%= content_tag(:span, '', :id => 'range_ini')%> - <%= content_tag(:span, '', :id => 'range_fin')%>
 						<%= hidden_field_tag 'job[salary_range_ini]', @job.salary_range_ini %>
 						<%= hidden_field_tag 'job[salary_range_fin]',  @job.salary_range_fin %>
 				  </p>
@@ -82,7 +82,7 @@
 </fieldset>
 <div class="form-actions">
 	<%= button_tag(type: 'submit', class: 'btn btn-primary', :name => 'preview_button') do %>
-	    <i class=" icon-pencil"></i> <%= @job.new_record? ? 'Vista previa' : 'Aceptar' %>
+	    <i class=" icon-pencil"></i> Aceptar
 	<% end %>
 </div>
 <% end %>
