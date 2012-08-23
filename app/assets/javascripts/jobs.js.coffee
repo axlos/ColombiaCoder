@@ -109,6 +109,31 @@ $("#no_experience_required").bind 'click', (event) =>
 
 
 # autocomplete de tecnologias, ver: http://www.linkedin.com/ta/skill
-#$("#mytags").tagit();
+skills = $('#skills')
 
-# Aplica para la GUI de busquedas
+skills.tagit({
+  tagSource: (request, response) ->
+        $.ajax({
+          url: "http://www.linkedin.com/ta/skill",
+          dataType: "jsonp",
+          data: {
+            query: request.term
+          },
+          success: (data) ->
+            response ($.map(data.resultList, (item) ->
+              return {
+                label: item.displayName, 
+                value: item.displayName,
+                id: item.id
+              }
+            ))
+        })
+  ,onTagRemoved: (evt, tag) ->
+}).tagit('option', 'onTagAdded', (evt, tag) ->
+  $('<input>').attr({
+    type: 'hidden',
+    name: 'job[technologies_attributes][][name]',
+    value: skills.tagit('tagLabel', tag)
+  }).appendTo('#tempral');
+  return;
+);
