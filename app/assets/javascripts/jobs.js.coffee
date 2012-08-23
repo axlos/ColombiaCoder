@@ -109,31 +109,32 @@ $("#no_experience_required").bind 'click', (event) =>
 
 
 # autocomplete de tecnologias, ver: http://www.linkedin.com/ta/skill
-skills = $('#skills')
+skillCmp = $('#skill')
 
-skills.tagit({
-  tagSource: (request, response) ->
-        $.ajax({
-          url: "http://www.linkedin.com/ta/skill",
-          dataType: "jsonp",
-          data: {
-            query: request.term
-          },
-          success: (data) ->
-            response ($.map(data.resultList, (item) ->
-              return {
-                label: item.displayName, 
-                value: item.displayName,
-                id: item.id
-              }
-            ))
-        })
-  ,onTagRemoved: (evt, tag) ->
-}).tagit('option', 'onTagAdded', (evt, tag) ->
-  $('<input>').attr({
-    type: 'hidden',
-    name: 'job[technologies_attributes][][name]',
-    value: skills.tagit('tagLabel', tag)
-  }).appendTo('#tempral');
-  return;
-);
+skillCmp.ajaxChosen({
+  url: 'http://www.linkedin.com/ta/skill',
+  dataType: 'jsonp',
+  jsonTermKey: 'query',
+  minTermLength: 1
+},(data) ->
+  terms = {};
+  $.each(data.resultList, (i, val) ->
+    terms[val.displayName] = val.displayName;
+  );
+  return terms;
+).change( ->
+  skills = new String(skillCmp.val()).split(',')
+  # remover todos los elementos
+  $("[name='job[technologies_attributes][][name]']").remove()
+  # volver a generar todos los elementos pero que se encuetran en el chosen
+  $.each skills, (i, val) ->
+    unless val is 'null' 
+      $('<input>').attr({
+        id: 'skill_' + val,
+        type: 'hidden',
+        name: 'job[technologies_attributes][][name]',
+        value: val
+      }).appendTo('#skills')
+)
+
+$("#skill").trigger("liszt:updated");
