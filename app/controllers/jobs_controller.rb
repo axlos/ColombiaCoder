@@ -57,6 +57,7 @@ class JobsController < ApplicationController
   # GET /jobs/new@job = session[:job_params]
   def new
     @job = Job.new
+    
     # solo si el usuario esta autenticado
     if user_signed_in?
       # verificar si existe alguna oferta laboral por defecto para traer la informacion de la empresa
@@ -74,8 +75,8 @@ class JobsController < ApplicationController
         # verificar si el usuario tiene informacion de contacto
         @job.resume_directly = true
         @job.email_address = current_user.contact.email
-        @job.geoname_id = current_user.contact.geoname_id
-        @job.geoname = current_user.contact.geoname
+        #@job.geoname_id = current_user.contact.geoname_id
+        #@job.geoname = current_user.contact.geoname
       end
     end
     
@@ -101,6 +102,30 @@ class JobsController < ApplicationController
   # PUT /jobs/1
   def update
     @job = Job.find(params[:id])
+
+    skills_ids = Array.new
+    skills_new = Array.new
+        
+    params[:job][:technology_ids].each do |skill|
+      unless skill.empty?      
+        # verificar que no sea un id, si es un string es por que no existe la tecnologia
+        if skill.numeric?
+          # guardar el id de skill en un arreglo temporal
+          skills_ids << skill
+        else
+          skills_new << Technology.find_or_create_by_job_id_and_name(@job.id, skill).id
+        end
+      end
+    end
+
+    # borrar todos los parametros enviados para las tecnologias    
+    params[:job][:technology_ids].clear
+    # join arreglos
+    skills_ids = skills_ids | skills_new
+        
+    # agregar los skills existentes
+    params[:job][:technology_ids] = skills_ids
+    
     if @job.update_attributes(params[:job])
       redirect_to @job, notice: 'Oferta laboral actualizada.'
     else
