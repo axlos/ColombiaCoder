@@ -109,7 +109,7 @@ $("#no_experience_required").bind 'click', (event) =>
 
 
 # autocomplete de tecnologias, ver: http://www.linkedin.com/ta/skill
-skillCmp = $('#skill')
+skillCmp = $('#job_technology_ids')
 
 skillCmp.ajaxChosen({
   url: 'http://www.linkedin.com/ta/skill',
@@ -122,19 +122,6 @@ skillCmp.ajaxChosen({
     terms[val.displayName] = val.displayName;
   );
   return terms;
-).change( ->
-  skills = new String(skillCmp.val()).split(',')
-  # remover todos los elementos
-  $("[name='job[technologies_attributes][][name]']").remove()
-  # volver a generar todos los elementos pero que se encuetran en el chosen
-  $.each skills, (i, val) ->
-    unless val is 'null' 
-      $('<input>').attr({
-        id: 'skill_' + val,
-        type: 'hidden',
-        name: 'job[technologies_attributes][][name]',
-        value: val
-      }).appendTo('#skills')
 )
 
 $("#skill").trigger("liszt:updated");
