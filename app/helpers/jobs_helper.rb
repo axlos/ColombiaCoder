@@ -23,6 +23,13 @@ module JobsHelper
         # Truncar descripcion de trabajo, quitar tags HTML
         content_tag(:dd, content_tag(:span, truncate(strip_tags(job.job_description), :length => 130), :class => 'muted')) +
         content_tag(:dd, job.job_types.to_sentence) + 
+        content_tag(:dd, 
+          raw(
+            job.technologies.collect do |skill|
+              content_tag(:span, "#{skill.name}", :class => 'label label-info') + ' '
+            end.join
+          )
+        ) +
         content_tag(:hr)
     end
   end

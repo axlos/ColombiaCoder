@@ -31,8 +31,9 @@
 			<br/>
 			<br/>
 			<!-- Localizacion -->
-			<%= text_field_tag :job_geoname, params[:job_geoname] %>
-			<%= hidden_field_tag :job_geoname_id, params[:job_geoname_id] %>
+			<%= f.input :geoname_id, :as => :select, :input_html => { :class => 'span12' }, :collection => [ @job.geoname ], :prompt => @job.geoname %>
+			<%= hidden_field_tag 'job[geoname]', @job.geoname %>
+
 			<%= f.association :job_types, :as => :check_boxes, :label => 'Tipo de contrato:' %>
 			<!-- Rango salarial -->
 			<hr/>

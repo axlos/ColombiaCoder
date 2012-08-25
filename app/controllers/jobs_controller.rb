@@ -11,8 +11,15 @@ class JobsController < ApplicationController
     @job.job_types = JobType.all unless params[:job][:job_type_ids].present?
     
     search = Job.search do
+      # buscar por nombre de Localizacion
+      fulltext params[:job][:geoname] do
+        fields(:geoname)
+      end
+      fulltext params[:skill] do
+        fields(:technologies)
+      end
       # Localizacion
-      with(:geoname_id, params[:job_geoname_id]) if params[:job_geoname_id].present?
+      with(:geoname_id, params[:job][:geoname_id]) if params[:job][:geoname_id].present?
       # Salario negociable
       with(:salary_negotiable, params[:job][:salary_negotiable] == 'true') if params[:job][:salary_negotiable].present?
       # Rango de salarios

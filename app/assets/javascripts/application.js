@@ -18,6 +18,9 @@
 //= require bootstrap-wysihtml5-all
 //= require twitter/bootstrap
 //= require rails.validations
+//= requiere abstract-chosen
+//= requiere chosen.jquery
+//= requiere ajax-chosen
 //= require_tree .
 
 $(function() {

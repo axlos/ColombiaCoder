@@ -2,7 +2,7 @@
 <fieldset>
 	<legend>
 		Informacion de la empresa
-	</legend>
+	</legend>	
 	<%= f.input :company_name, :input_html => { :class => 'span12' } %>
 	<%= f.input :company_web_site, :input_html => { :class => 'span12' }, :hint => 'ej. http://www.colombiandeveloper.com' %>
 	<div class="control-group">
@@ -27,14 +27,13 @@
 		Informacion de la oferta laboral
 	</legend>
 	<%= f.input :job_title, :input_html => { :class => 'span12' } %>
-	<div class="control-group">
-		<label class="string optional control-label" for="job_geoname">Ciudad</label>
-		<div class="controls">
-			<%= text_field_tag 'job[geoname]', @job.geoname, :class => 'span12', :placeholder=>'ej. Bogotá, Bogotá D.C., Colombia' %>
-			<%= hidden_field_tag 'job[geoname_id]', @job.geoname_id %>
-		</div>
-	</div>
+	
+	<%= f.input :geoname_id, :as => :select, :input_html => { :class => 'span6' }, :collection => [ @job.geoname ], :prompt => @job.geoname %>
+	
+	<%= hidden_field_tag 'job[geoname]', @job.geoname %>
+	
 	<%= f.input :job_description, :input_html => { :class => 'span12', :rows => 7 } %>
+	<%= f.association :technologies, :multiple => true, :input_html => { :class => 'span12' } %>
 	<div class="control-group">
 		<div class="controls">
 			<label class="checkbox">

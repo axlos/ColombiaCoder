@@ -4,9 +4,9 @@
 		<div class="page-header">
 			<h1>Empleos en tecnologias de informacion <small>Colombia</small></h1>
 		</div>
-		<form class="well form-search">
+		<%= form_tag jobs_path, :method => :get, :class => 'well form-search' do %>
 			<div class="input-prepend">
-				<span class="add-on"><i class="icon-search"></i></span><%= text_field_tag 'job[geoname]', '', :class => 'input-xlarge search-query', :placeholder=>'ej. java' %>
+				<span class="add-on"><i class="icon-search"></i></span><%= text_field_tag 'skill', '', :class => 'input-xlarge search-query', :placeholder=>'ej. java' %>
 			</div>
 			<div class="input-prepend">
 				<span class="add-on"><i class="icon-search"></i></span><%= text_field_tag 'job[geoname]', '', :class => 'input-xlarge search-query', :placeholder=>'ej. Bogotá, Bogotá D.C., Colombia' %>
@@ -14,14 +14,12 @@
 			<button type="submit" class="btn btn-primary">
 				Buscar
 			</button>
-		</form>
+		<% end %>
 		<p>
-			<span class="label label-info">Palabra clave</span>
-			<span><a href="">Java</a></span>&nbsp;- <span><a href="">Ruby</a></span>&nbsp;- <span><a href="">.Net</a></span>&nbsp;- <span><a href="">SQL Server</a></span>&nbsp;- <span><a href="">Oracle</a></span>&nbsp;- <span><a href="">Scrum Master</a></span>
-		</p>
-		<p>
-			<span class="label label-info">Localizacion</span>
-			<span><a href="">Bogota</a></span>&nbsp;- <span><a href="">Medellin</a></span>&nbsp;- <span><a href="">Cali</a></span>&nbsp;- <span><a href="">Barranquilla</a></span>&nbsp;- <span><a href="">Santander</a></span>
+			<span class='label label-info'>Tecnologias:</span>
+			<%= @presenter.top_skills.map do |skill|
+          		link_to skill, jobs_path({:skill => skill.name})
+        	end.to_sentence(:words_connector => ' - ', :last_word_connector => ' - ').html_safe %>
 		</p>
 		<div class="row-fluid">
 			<div class="span6">

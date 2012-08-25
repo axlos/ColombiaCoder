@@ -36,9 +36,9 @@ $("#slider_range").slider({
         $("#job_salary_range_fin").val(ui.values[1])
 });
 
-# Formato de moneda para el slider      
-$("#range_ini").text($("#slider_range").slider("values", 0)).formatCurrency({roundToDecimalPlace: 0})
-$("#range_fin").text($("#slider_range").slider("values", 1)).formatCurrency({roundToDecimalPlace: 0})
+# Formato de moneda para el slider
+$("#range_ini").text($("#slider_range").slider("values", 0)).formatCurrency({roundToDecimalPlace: 0}) if $("#range_ini").length isnt 0
+$("#range_fin").text($("#slider_range").slider("values", 1)).formatCurrency({roundToDecimalPlace: 0}) if $("#range_fin").length isnt 0
 
 # funtion para habilitar o deshabilitar slider
 Salary_negotiable_slider = (checked) ->
@@ -70,38 +70,32 @@ $('#job_company_description, #job_job_description').wysihtml5({
 })
 
 # autocomplete de ciudades, ver: http://www.geonames.org/
-$('#job_geoname').autocomplete({
-  source: (request, response) ->
-        $.ajax({
-          url: "http://ws.geonames.org/searchJSON",
-          dataType: "jsonp",
-          data: {
-            country: "CO",
-            featureClass: "P",
-            maxRows: 5,
-            name_startsWith: request.term,
-            lang: "es",
-            type: "json"
-          },
-          success: (data) ->
-            response ($.map(data.geonames, (item) ->
-              return {
-                label: item.name + (if item.adminName1 then ", " + item.adminName1 else "") + ", " + item.countryName, 
-                value: item.name + (if item.adminName1 then ", " + item.adminName1 else "") + ", " + item.countryName,
-                id: item.geonameId
-              }
-            ))
-        })
-  ,minLength: 2
-  ,max: 2
-  ,select: (event, ui) ->
-    # Set el geonameId data json a el hidden que guardara el valor
-    $("#job_geoname_id").val(ui.item.id)
-  ,change: (event, ui) ->
-    if ui.item is null
-      # Si no ha seleccionado ningun geoname, borrar el valor para no enviar nada al servi
-      $("#job_geoname_id").val(null)
-})
+# autocomplete de tecnologias, ver: http://www.linkedin.com/ta/skill
+jobGeoname = $('#job_geoname_id')
+
+jobGeoname.ajaxChosen({
+  url: 'http://ws.geonames.org/searchJSON',
+  dataType: 'jsonp',
+  minTermLength: 1,
+  jsonTermKey: 'name_startsWith',
+  data: {
+    country: "CO",
+    featureClass: "P",
+    maxRows: 5,
+    lang: "es",
+    type: "json"
+  },
+}, (data) ->
+  terms = {};
+  $.each(data.geonames, (i, item) ->
+    terms[item.geonameId] = item.name + (if item.adminName1 then ", " + item.adminName1 else "") + ", " + item.countryName 
+  );
+  return terms;
+).change( ->
+  # Set el geonameId data json a el hidden que guardara el valor
+  #$("#job_geoname_id").val(jobGeoname.val())
+  $("#job_geoname").val($('#job_geoname_id option:selected').text())
+)
 
 # Depende del valor que seleccione del checkbox cambia el hidden para ser guardado
 $("#no_experience_required").bind 'click', (event) =>
@@ -122,6 +116,4 @@ skillCmp.ajaxChosen({
     terms[val.displayName] = val.displayName;
   );
   return terms;
-)
-
-$("#skill").trigger("liszt:updated");
+{allow_single_deselect: true })
