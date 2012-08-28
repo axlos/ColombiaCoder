@@ -3,13 +3,7 @@
   <%= f.input :email, :class => 'text_field' %>
   <%= f.input :company, :class => 'text_field' %>
   <%= f.input :web_site, :class => 'text_field', :hint => 'ej. http://www.colombiandeveloper.com' %>
-  <div class="control-group">
-	<label class="string optional control-label" for="contact_geoname">Ciudad</label>
-	<div class="controls">
-		<%= text_field_tag 'contact[geoname]', @contact.geoname %>
-		<%= hidden_field_tag 'contact[geoname_id]', @contact.geoname_id %>
-	</div>
-  </div>
+  <%= f.input :location, :class => 'text_field', :hint => 'ej. Bogotá, Medellin, Cali, etc.' %>
   <%= f.input :street_address, :class => 'text_field' %>
   <%= f.input :phone, :class => 'text_field' %> 
   

@@ -4,6 +4,9 @@ body {
 }
 
 @import "twitter/bootstrap/responsive";
+@import "bootswatch/variables.less";
+@import "bootswatch/bootswatch.less";
+@import "chosen.css";
 
 // Set the correct sprite paths
 @iconSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings.png');
@@ -30,3 +33,47 @@ body {
 //
 // Example:
 // @linkColor: #ff0000;
+
+@grayContainer:   #f9f9f9;
+
+// WELLS
+
+.well-custom {
+  .border-radius(0px);
+  border-top: 0px;
+}
+
+// THUMBNAILS
+.thumbnails > li {
+  margin-bottom: 0px;
+}
+
+.thumbnail {
+  display: block;
+  padding: 4px;
+  line-height: 1;
+  border: 0px solid red;
+  -webkit-border-radius: 0px;
+     -moz-border-radius: 0px;
+          border-radius: 0px;
+  -webkit-box-shadow: 0 0px 0px;
+     -moz-box-shadow: 0 0px 0px;
+          box-shadow: 0 0px 0px;
+}
+
+.logo {
+  font-style: italic;
+  color: white;
+  .log1 {
+  }
+  .log2 {
+    color: @orange;
+  }
+  .log3 {
+    color: #9798ab;
+  }
+}
+
+.footer {
+  background: #f2f2f2;
+} 

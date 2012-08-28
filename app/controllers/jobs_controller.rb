@@ -1,4 +1,6 @@
 class JobsController < ApplicationController
+  
+  include ActionView::Helpers::DateHelper
 
   before_filter :authenticate_user!, :except => [:show, :index]
 
@@ -12,14 +14,13 @@ class JobsController < ApplicationController
     
     search = Job.search do
       # buscar por nombre de Localizacion
-      fulltext params[:job][:geoname] do
-        fields(:geoname)
+      fulltext params[:job][:location] do
+        fields(:location)
       end
+      # buscar por skills
       fulltext params[:skill] do
         fields(:technologies)
       end
-      # Localizacion
-      with(:geoname_id, params[:job][:geoname_id]) if params[:job][:geoname_id].present?
       # Salario negociable
       with(:salary_negotiable, params[:job][:salary_negotiable] == 'true') if params[:job][:salary_negotiable].present?
       # Rango de salarios
@@ -53,7 +54,14 @@ class JobsController < ApplicationController
 
   # GET /jobs/1
   def show
-    @job = Job.find(params[:id])  
+    @job = Job.find(params[:id])
+    # verificar si ya expira la oferta laboral
+    @job.expire
+    # visualizar mensaje de expiracion
+    if Job::EXPIRE == @job.status
+       # TODO: Enviar correo a la empresa de que finalizo la oferta
+       flash[:expire] = "Esta oferta laboral caduco hace #{distance_of_time_in_words(Time.now, @job.created_at)}"
+    end
   end
 
   # GET /jobs/1/edit
@@ -71,30 +79,33 @@ class JobsController < ApplicationController
       job_last = current_user.jobs.first
       if job_last
         @job.company_description = job_last.company_description
-        @job.company_logo = job_last.company_logo
         @job.company_name = job_last.company_name
         @job.company_web_site = job_last.company_web_site
-        if job_last.application_details
-          @job.application_details = job_last.application_details
-        end
+        @job.application_details = job_last.application_details if job_last.application_details
+        @job.resume_directly = job_last.resume_directly
       end
       if current_user.email
         # verificar si el usuario tiene informacion de contacto
-        @job.resume_directly = true
         @job.email_address = current_user.contact.email
-        #@job.geoname_id = current_user.contact.geoname_id
-        #@job.geoname = current_user.contact.geoname
+        @job.location = current_user.contact.location
       end
     end
-    
   end
   
   # POST /jobs
   def create
+    # guardar los skills en una variable temporal
+    array_skills = Array.new(params[:job][:technology_ids])
+    # borrar los skills enviados como parametros
+    params[:job][:technology_ids].clear
+    
     # Referenciar el usuario en session
     @job = Job.new(params[:job])
     @job.user = current_user
+    
     if @job.save
+      # asociar los skills a el job creado 
+      params_skills(array_skills, @job.id)
       # Previsualizar la oferta de empleo
       if params[:preview_button]
         redirect_to :action => 'show', :id => @job.id
@@ -109,30 +120,8 @@ class JobsController < ApplicationController
   # PUT /jobs/1
   def update
     @job = Job.find(params[:id])
-
-    skills_ids = Array.new
-    skills_new = Array.new
-        
-    params[:job][:technology_ids].each do |skill|
-      unless skill.empty?      
-        # verificar que no sea un id, si es un string es por que no existe la tecnologia
-        if skill.numeric?
-          # guardar el id de skill en un arreglo temporal
-          skills_ids << skill
-        else
-          skills_new << Technology.find_or_create_by_job_id_and_name(@job.id, skill).id
-        end
-      end
-    end
-
-    # borrar todos los parametros enviados para las tecnologias    
-    params[:job][:technology_ids].clear
-    # join arreglos
-    skills_ids = skills_ids | skills_new
-        
-    # agregar los skills existentes
-    params[:job][:technology_ids] = skills_ids
-    
+    # editar los skills enviandos como parametros
+    params[:job][:technology_ids] = params_skills(params[:job][:technology_ids], @job.id)
     if @job.update_attributes(params[:job])
       redirect_to @job, notice: 'Oferta laboral actualizada.'
     else
@@ -157,20 +146,10 @@ class JobsController < ApplicationController
     end
   end
   
-  # PUT /jobs/1/close
-  def close
+  # PUT /jobs/1/expire
+  def expire
     # Cambiar de estado a finalizada
     if update_status(params[:id], 3)
-      redirect_to admin_jobs_url
-    else
-      render action: "show"
-    end
-  end
-  
-  # PUT /jobs/1/republish
-  def republish
-    # Cambiar de estado a finalizada
-    if update_status(params[:id], 2)
       redirect_to admin_jobs_url
     else
       render action: "show"
@@ -182,6 +161,28 @@ class JobsController < ApplicationController
     @job = Job.find(job_id)
     # Cambiar de estado la oferta laboral
     @job.update_attribute(:status, status)
+  end
+  
+  def params_skills(params_skills, job_id)
+    skills_ids = Array.new
+    skills_new = Array.new
+          
+    params_skills.each do |skill|
+      unless skill.empty?      
+        # verificar que no sea un id, si es un string es por que no existe la tecnologia
+        if skill.numeric?
+          # guardar el id de skill en un arreglo temporal
+          skills_ids << skill
+        else
+          skills_new << Technology.find_or_create_by_job_id_and_name(job_id, skill).id
+        end
+      end
+    end
+
+    # borrar todos los parametros enviados para las tecnologias    
+    params_skills.clear
+    # retornar los skills creados y referenciados a los existentes
+    skills_ids = skills_ids | skills_new
   end
   
 end

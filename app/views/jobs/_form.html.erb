@@ -1,22 +1,28 @@
-<%= simple_form_for @job, :validate => true, :html => { :class => 'form-horizontal', :multipart => true } do |f| %>
+<%= simple_form_for @job, :validate => true, :html => { :class => 'form-horizontal well', :multipart => true } do |f| %>
+<div class="alert alert-block">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <h4><i class=" icon-warning-sign"></i> Informacion!</h4>
+  Por favor, antes de publicar su oferta, lea nuestras normas de publicación. Le recordamos que si intenta publicar ofertas que no cumplen las normas de  publicación, serán eliminadas y su cuenta podrá ser dada de baja sin previo aviso.
+  <%= link_to 'Pulse aquí para ver las normas', '#agreeModal', :html_options => { :class => 'btn btn-link' }, :role => 'button', 'data-toggle' => 'modal' %>
+</div>
 <fieldset>
 	<legend>
 		Informacion de la empresa
-	</legend>	
+	</legend>
 	<%= f.input :company_name, :input_html => { :class => 'span12' } %>
 	<%= f.input :company_web_site, :input_html => { :class => 'span12' }, :hint => 'ej. http://www.colombiandeveloper.com' %>
 	<div class="control-group">
 		<label class="string optional control-label">Logo de la empresa</label>
 		<div class="controls">
 			<% if @job.company_logo? %>
-				<div class="alert alert-info">
-				  <a class="close" data-dismiss="alert" href="#">×</a>
-				   <i class="icon-info-sign"></i> El logo de la empresa ya ha sido cargado!, puede cambiar la imagen haciendo click en "Seleccionar archivo"". 
-				</div>
+			<div class="alert alert-info">
+				<a class="close" data-dismiss="alert" href="#">×</a>
+				<i class="icon-info-sign"></i> El logo de la empresa ya ha sido cargado!, puede cambiar la imagen haciendo click en "Seleccionar archivo"".
+			</div>
 			<% end %>
 			<%= f.file_field :company_logo %>
-            <p class="help-block">
-            	Logotipo de la empresa (GIF, JPG, PNG)
+			<p class="help-block">
+				Logotipo de la empresa (GIF, JPG, PNG)
 			</p>
 		</div>
 	</div>
@@ -27,26 +33,21 @@
 		Informacion de la oferta laboral
 	</legend>
 	<%= f.input :job_title, :input_html => { :class => 'span12' } %>
-	
-	<%= f.input :geoname_id, :as => :select, :input_html => { :class => 'span6' }, :collection => [ @job.geoname ], :prompt => @job.geoname %>
-	
-	<%= hidden_field_tag 'job[geoname]', @job.geoname %>
-	
+
+	<%= f.input :location, :input_html => { :class => 'span12' }, :hint => 'ej. Bogotá, Medellin, Cali, etc.' %>
+
 	<%= f.input :job_description, :input_html => { :class => 'span12', :rows => 7 } %>
-	<%= f.association :technologies, :multiple => true, :input_html => { :class => 'span12' } %>
+	<%= f.association :technologies, :multiple => true, :input_html => { :class => 'span12' }, :hint => 'ej. Java, Ruby on Rails, .Net, Oracle, etc.' %>
 	<div class="control-group">
 		<div class="controls">
-			<label class="checkbox">
-                <%= check_box_tag 'no_experience_required', nil, @job.no_experience_required == true %>
-                <%= hidden_field_tag 'job[no_experience_required]', @job.no_experience_required %>
-                Es una oferta laboral para candidatos SIN experiencia?
-            </label>
-            <p class="help-block">
-            	ej. estudiantes, recien graduados, etc.
+			<label class="checkbox"> <%= check_box_tag 'no_experience_required', nil, @job.no_experience_required == true %>
+				<%= hidden_field_tag 'job[no_experience_required]', @job.no_experience_required %>
+				Es una oferta laboral para candidatos SIN experiencia? </label>
+			<p class="help-block">
+				ej. estudiantes, recien graduados, etc.
 			</p>
 		</div>
 	</div>
-	
 	<div class="control-group">
 		<div class="controls">
 			<label class="radio"><%= radio_button_tag 'job[salary_negotiable]', true, @job.salary_negotiable == true %>
@@ -56,23 +57,23 @@
 			<div class="control-group">
 				<label class="control-label">Salario</label>
 				<div class="controls">
-				  <%= content_tag(:div, '', :id => 'slider_range')%>
-	              <p class="help-block">
+					<%= content_tag(:div, '', :id => 'slider_range')%>
+					<p class="help-block">
 						<%= content_tag(:span, '', :id => 'range_ini')%> - <%= content_tag(:span, '', :id => 'range_fin')%>
 						<%= hidden_field_tag 'job[salary_range_ini]', @job.salary_range_ini %>
 						<%= hidden_field_tag 'job[salary_range_fin]',  @job.salary_range_fin %>
-				  </p>
-            	</div>
-            </div>
+					</p>
+				</div>
+			</div>
 		</div>
 	</div>
 	<%= f.association :job_types, :as => :check_boxes %>
 	<div class="control-group">
-		<label class="control-label">Como aplicar</label>
+		<label class="control-label">Como aplicar <%= @job.resume_directly %></label>
 		<div class="controls">
 			<label class="radio"> <%= radio_button_tag 'job[resume_directly]', true, @job.resume_directly == true %>
 				Permitir que los candidatos adjunten su hoja de vida y se envie directamente a un email</label>
-			<%= f.input :email_address, :input_html => { :class => 'span12' } %>
+			<%= f.input :email_address, :input_html => { :class => 'span12', :disabled => @job.resume_directly == true } %>
 			<label class="radio"> <%= radio_button_tag 'job[resume_directly]', false, @job.resume_directly == false %>
 				O, detalle como aplicar a la oferta laboral:</label>
 			<%= f.input :application_details, :input_html => { :class => 'span12', :rows => 4, :disabled => @job.resume_directly }%>
@@ -80,8 +81,30 @@
 	</div>
 </fieldset>
 <div class="form-actions">
-	<%= button_tag(type: 'submit', class: 'btn btn-primary', :name => 'preview_button') do %>
-	    <i class=" icon-pencil"></i> Aceptar
+	<%= button_tag(type: 'submit', :class => 'btn btn-primary', :name => 'preview_button', :disable_with => "Guardando...") do %>
+	<i class=" icon-pencil"></i> Aceptar
 	<% end %>
+</div>
+<div id="agreeModal" class="modal hide fade">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	    <h3>Terminos de publicación de ofertas laborales</h3>
+	</div>
+  	<div class="modal-body">
+		<div data-spy="scroll" class="scrollspy-example">
+          <h4 id="fat">@fat</h4>
+          <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic. Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
+          <h4 id="mdo">@mdo</h4>
+          <p>Veniam marfa mustache skateboard, adipisicing fugiat velit pitchfork beard. Freegan beard aliqua cupidatat mcsweeney's vero. Cupidatat four loko nisi, ea helvetica nulla carles. Tattooed cosby sweater food truck, mcsweeney's quis non freegan vinyl. Lo-fi wes anderson +1 sartorial. Carles non aesthetic exercitation quis gentrify. Brooklyn adipisicing craft beer vice keytar deserunt.</p>
+          <h4 id="one">one</h4>
+          <p>Occaecat commodo aliqua delectus. Fap craft beer deserunt skateboard ea. Lomo bicycle rights adipisicing banh mi, velit ea sunt next level locavore single-origin coffee in magna veniam. High life id vinyl, echo park consequat quis aliquip banh mi pitchfork. Vero VHS est adipisicing. Consectetur nisi DIY minim messenger bag. Cred ex in, sustainable delectus consectetur fanny pack iphone.</p>
+          <h4 id="two">two</h4>
+          <p>In incididunt echo park, officia deserunt mcsweeney's proident master cleanse thundercats sapiente veniam. Excepteur VHS elit, proident shoreditch +1 biodiesel laborum craft beer. Single-origin coffee wayfarers irure four loko, cupidatat terry richardson master cleanse. Assumenda you probably haven't heard of them art party fanny pack, tattooed nulla cardigan tempor ad. Proident wolf nesciunt sartorial keffiyeh eu banh mi sustainable. Elit wolf voluptate, lo-fi ea portland before they sold out four loko. Locavore enim nostrud mlkshk brooklyn nesciunt.</p>
+          <h4 id="three">three</h4>
+          <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic. Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
+          <p>Keytar twee blog, culpa messenger bag marfa whatever delectus food truck. Sapiente synth id assumenda. Locavore sed helvetica cliche irony, thundercats you probably haven't heard of them consequat hoodie gluten-free lo-fi fap aliquip. Labore elit placeat before they sold out, terry richardson proident brunch nesciunt quis cosby sweater pariatur keffiyeh ut helvetica artisan. Cardigan craft beer seitan readymade velit. VHS chambray laboris tempor veniam. Anim mollit minim commodo ullamco thundercats.
+          </p>
+        </div>
+  	</div>
 </div>
 <% end %>

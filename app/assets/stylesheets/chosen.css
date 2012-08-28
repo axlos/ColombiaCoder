@@ -254,6 +254,7 @@
 .chzn-container .chzn-results li em {
   background: #feffde;
   font-style: normal;
+  border-top-width: 0px;
 }
 .chzn-container .chzn-results .highlighted em {
   background: transparent;

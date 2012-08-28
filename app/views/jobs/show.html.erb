@@ -23,14 +23,27 @@
 					<p>
 						<%= link_to 'Editar', edit_job_path(@job), :class => 'btn btn-primary' %>
 						<% if @job.status == 1 %>
-							<%= link_to 'Publicar oferta', post_job_path(@job), :class => 'btn btn-success', :method => :put %>
+							<%= link_to 'Publicar oferta', '#confirmModal', :class => 'btn', :role => 'button', 'data-toggle' => 'modal' %>
 						<% end %>
 						<% if @job.status == 3 %>
-							<%= link_to 'Republicar oferta', republish_job_path(@job), :class => 'btn btn-info', :method => :put %>
+							<%= link_to 'Republicar oferta', post_job_path(@job), :class => 'btn', :method => :put %>
 						<% end %>
 					</p>
 				</div>
 				<p>Estado de oferta laboral: <%= status (@job) %></p>
+				<div id="confirmModal" class="modal hide fade">
+					<div class="modal-header">
+				    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				    	<h3>Publicación de oferta</h3>
+				  	</div>
+				  	<div class="modal-body">
+  						<p>Su oferta laboral sera publicada por un periodo de <strong>30 dias</strong>, pasado este tiempo finalizara automáticamente.</p>
+  						<p>Puede republicar, finalizar o eliminar sus ofertas laborales desde la opción <strong>Mis ofertas laborales</strong></p>
+				  	</div>
+				  	<div class="modal-footer">
+						<%= link_to 'Publicar', post_job_path(@job), :class => 'btn btn-info', :method => :put %>
+				  	</div>
+				</div>
 			</div>
 		<% end %>
 	</div>
@@ -49,7 +62,7 @@
 						<a href="#"><i class="icon-twitter"></i> Twittear esta oferta</a>
 					</li>
 					<li>
-						<a href="#"><i class="icon-facebook"></i> Compartir esta oferta en Facebook</a>
+						<a href="#"><i class="icon-facebook"></i> Compartir en Facebook</a>
 					</li>
 					<li>
 						<a href="#"><i class="icon-linkedin"></i> Compartir en Linkedin</a>

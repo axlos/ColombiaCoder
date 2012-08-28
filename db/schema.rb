@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120813055255) do
+ActiveRecord::Schema.define(:version => 20120826194009) do
 
   create_table "contacts", :force => true do |t|
     t.string   "full_name"
@@ -20,11 +20,10 @@ ActiveRecord::Schema.define(:version => 20120813055255) do
     t.string   "web_site"
     t.string   "street_address"
     t.string   "phone"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.string   "geoname_id"
-    t.string   "geoname"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "user_id"
+    t.string   "location",       :default => "", :null => false
   end
 
   add_index "contacts", ["user_id"], :name => "index_contacts_on_user_id"
@@ -57,8 +56,6 @@ ActiveRecord::Schema.define(:version => 20120813055255) do
     t.text     "application_details"
     t.datetime "created_at",                                     :null => false
     t.datetime "updated_at",                                     :null => false
-    t.string   "geoname_id"
-    t.string   "geoname"
     t.string   "company_logo_file_name"
     t.string   "company_logo_content_type"
     t.integer  "company_logo_file_size"
@@ -66,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20120813055255) do
     t.integer  "status",                    :default => 1,       :null => false
     t.integer  "user_id"
     t.boolean  "no_experience_required",    :default => false
+    t.string   "location",                  :default => "",      :null => false
   end
 
   add_index "jobs", ["user_id"], :name => "index_jobs_on_user_id"

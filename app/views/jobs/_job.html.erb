@@ -1,9 +1,18 @@
+<% if flash[:expire] %>
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="alert alert-block">
+				<strong>Ups!</strong> <%= flash[:expire] %>
+			</div>
+		</div>
+	</div>
+<% end %>
 <div class="row-fluid">
 	<div class="span9">
 		<h2><%= job.job_title.titleize %></h2>
 		<p>
 			<% job.technologies.each do |skill| %>
-				<%= content_tag :span, skill.name, :class => 'label label-info' %>
+			<%= content_tag :span, skill.name, :class => 'label label-info' %>
 			<% end %>
 		</p>
 		<dl class="dl-horizontal">
@@ -17,7 +26,7 @@
 				<strong>Localizacion:</strong>
 			</dt>
 			<dd>
-				<%= job.geoname %>
+				<%= job.location %>
 			</dd>
 			<% if job.job_types.length > 0 %>
 			<dt>
@@ -26,7 +35,7 @@
 			<dd>
 				<%= job.job_types.to_sentence %>
 			</dd>
-			<% end%>
+			<% end %>
 			<dt>
 				<strong>Salario:</strong>
 			</dt>
@@ -72,15 +81,39 @@
 		<br/>
 	</div>
 </div>
-<% unless job.resume_directly %>
-<div class="row-fluid">
-	<div class="span12">
-		<div class="well">
-			<h3>Como aplicar a la oferta laboral</h3>
-			<p>
-				<%= job.application_details %>
-			</p>
+<% if Job::POST == job.status %>
+	<% unless job.resume_directly %>
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="well">
+				<h3>Como aplicar a la oferta laboral</h3>
+				<p>
+					<%= job.application_details %>
+				</p>
+			</div>
 		</div>
 	</div>
-</div>
+	<% else %>
+		<%= button_tag "Aplicar", :disable_with => "Please wait...", :class => 'btn btn-success btn-large', 'data-toggle' => 'modal', 'data-target' => '#myModal' %>
+	<% end %>
 <% end %>
+
+<div id="myModal" class="modal hide fade">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+			&times;
+		</button>
+		<h3><%= job.job_title.titleize %></h3>
+	</div>
+	<div class="modal-body">
+		<p>
+			<%= form_tag jobs_path, :method => :get, :class => 'well well-large form-search' do %>
+				
+			<% end %>
+		</p>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn btn-primary">Aceptar</a>
+		<a href="#" class="btn" data-dismiss="modal">Close</a>
+	</div>
+</div>

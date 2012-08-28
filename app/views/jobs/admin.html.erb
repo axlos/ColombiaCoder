@@ -27,24 +27,24 @@
 							<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu">
-							<% if job.status == 1 %>
+							<% if Job::DEFAULT == job.status %>
 							<li>
-								<%= link_to 'Publicar', post_job_path(job), :method => :put %>
+								<%= link_to 'Publicar', post_job_path(job), :method => :put, :confirm => 'Su oferta laboral sera publicada por un periodo de 30 dias, pasado este tiempo finalizara automáticamente.' %>
 							</li>
 							<% end %>
-							<% if job.status == 1 or job.status == 3%>
+							<% if Job::DEFAULT == job.status or Job::EXPIRE == job.status %>
 							<li>
-								<%= link_to 'Eliminar', job_path(job), :method => :delete, :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) %>
+								<%= link_to 'Eliminar', job_path(job), :method => :delete, :confirm => 'Su oferta laboral sera eliminada permanentemente, esta seguro?' %>
 							</li>
 							<% end %>
-							<% if job.status == 3 %>
+							<% if Job::EXPIRE == job.status %>
 							<li>
-								<%= link_to 'Republicar', republish_job_path(job), :method => :put %>
+								<%= link_to 'Republicar', post_job_path(job), :method => :put %>
 							</li>
 							<% end %>
-							<% if job.status == 2 %>
+							<% if Job::POST == job.status %>
 							<li>
-								<%= link_to 'Finalizar', close_job_path(job), :method => :put %>
+								<%= link_to 'Finalizar', expire_job_path(job), :method => :put %>
 							</li>
 							<% end %>
 						</ul>

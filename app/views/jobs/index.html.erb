@@ -31,8 +31,7 @@
 			<br/>
 			<br/>
 			<!-- Localizacion -->
-			<%= f.input :geoname_id, :as => :select, :input_html => { :class => 'span12' }, :collection => [ @job.geoname ], :prompt => @job.geoname %>
-			<%= hidden_field_tag 'job[geoname]', @job.geoname %>
+			<%= f.input :location, :input_html => { :class => 'span12' }, :hint => 'ej. Bogotá, Medellin, Cali, etc.' %>
 
 			<%= f.association :job_types, :as => :check_boxes, :label => 'Tipo de contrato:' %>
 			<!-- Rango salarial -->
@@ -52,11 +51,11 @@
 			<br/>
 			<br/>
 			<!-- Order de busqueda -->
-			<%= hidden_field_tag :order,  params[:order] || 'last' %>
+			<%= hidden_field_tag :order, params[:order] || 'last' %>
 			<!-- Nombre de empresa -->
 			<%= hidden_field_tag :company_name,  params[:company_name] %>
-			<%= button_tag(type: 'submit', class: 'btn btn-primary', :name => nil) do %>
-			    <i class=" icon-pencil"></i> Aceptar
+			<%= button_tag(type: 'submit', :class => 'btn btn-primary', :name => nil, :disable_with => "Buscando...") do %>
+			    <i class=" icon-search"></i> Buscar
 			<% end %>
 			<div class="pull-right">
 				<%= link_to 'Ver todas' %>

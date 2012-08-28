@@ -1,17 +1,31 @@
-<h2>Iniciar sesión</h2>
-<br />
-<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-<%= f.error_notification %>
-<div class="form-inputs">
-	<%= f.input :email, :required => false, :autofocus => true %>
-	<%= f.input :password, :required => false %>
-	<% if devise_mapping.rememberable? %>
-		<label class="checkbox">
-			<input class="boolean optional" id="user_remember_me" name="user[remember_me]" type="checkbox" value="1">
-			<input name="user[remember_me]" type="hidden" value="0">Recordarme
-		</label>
-	<% end %>
+<div class="row-fluid">
+	<div class="span12">
+		<h2>Iniciar sesión</h2>
+		<p>
+			Por favor, introduzca su dirección de correo electrónico y contraseña para iniciar sesión
+		</p>
+	</div>
 </div>
-<%= f.button :submit, "Iniciar sesión" %>
-<% end %>
-<%= render "devise/shared/links" %>
+<br />
+<div class="row-fluid">
+	<div class="span8" style="text-align: center;">
+		<%= image_tag("google.jpg", :class=> 'img-polaroid' ) %>
+	</div>
+	<div class="span4">
+		<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+		<%= f.error_notification %>
+		<div class="form-inputs">
+			<%= f.input :email, :required => false, :autofocus => true %>
+			<%= f.input :password, :required => false %>
+			<% if devise_mapping.rememberable? %>
+			<label class="checkbox">
+				<input class="boolean optional" id="user_remember_me" name="user[remember_me]" type="checkbox" value="1">
+				<input name="user[remember_me]" type="hidden" value="0">
+				Recordarme </label>
+			<% end %>
+		</div>
+		<%= f.button :submit, "Iniciar sesión" %>
+		<% end %>
+		<%= render "devise/shared/links" %>
+	</div>
+</div>

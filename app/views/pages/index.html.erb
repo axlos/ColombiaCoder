@@ -1,31 +1,53 @@
 <div class="row-fluid">
 	<div class="span8">
 		<!--Body content-->
-		<div class="page-header">
-			<h1>Empleos en tecnologias de informacion <small>Colombia</small></h1>
+		<div id="myCarousel" class="carousel slide" style="margin-bottom: 0px;">
+			<div class="carousel-inner">
+				<div class="item active">
+					<img src="http://twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg" alt="">
+					<div class="carousel-caption">
+						<h4>First Thumbnail label</h4>
+						<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+					</div>
+				</div>
+              	<div class="item">
+              		<img src="http://twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-02.jpg" alt="">
+                	<div class="carousel-caption">
+                  		<h4>Second Thumbnail label</h4>
+                  		<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                	</div>
+              	</div>
+              	<div class="item">
+                	<img src="http://twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-03.jpg" alt="">
+                	<div class="carousel-caption">
+                  		<h4>Third Thumbnail label</h4>
+                  		<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                	</div>
+              	</div>
+            </div>
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
 		</div>
-		<%= form_tag jobs_path, :method => :get, :class => 'well form-search' do %>
+		<%= form_tag jobs_path, :method => :get, :class => 'well well-custom form-search' do %>
 			<div class="input-prepend">
 				<span class="add-on"><i class="icon-search"></i></span><%= text_field_tag 'skill', '', :class => 'input-xlarge search-query', :placeholder=>'ej. java' %>
 			</div>
 			<div class="input-prepend">
-				<span class="add-on"><i class="icon-search"></i></span><%= text_field_tag 'job[geoname]', '', :class => 'input-xlarge search-query', :placeholder=>'ej. Bogotá, Bogotá D.C., Colombia' %>
+				<span class="add-on"><i class="icon-search"></i></span><%= text_field_tag 'job[location]', '', :class => 'input-xlarge search-query', :placeholder=>'ej. Bogotá, Bogotá D.C., Colombia' %>
 			</div>
-			<button type="submit" class="btn btn-primary">
-				Buscar
-			</button>
+			<%= button_tag "Buscar", :disable_with => "Buscando...", :class => 'btn btn-primary' %>
 		<% end %>
 		<p>
-			<span class='label label-info'>Tecnologias:</span>
+			<strong>Tecnologias: </strong>
 			<%= @presenter.top_skills.map do |skill|
           		link_to skill, jobs_path({:skill => skill.name})
-        	end.to_sentence(:words_connector => ' - ', :last_word_connector => ' - ').html_safe %>
+        		end.to_sentence(:words_connector => ' - ', :last_word_connector => ' - ').html_safe %>
 		</p>
 		<div class="row-fluid">
 			<div class="span6">
 				<!-- Ofertas de empleo urgentes -->
 				<div class="page-header">
-					<h2><i class="icon-fire"></i> Se requiere urgente</h2>
+					<h2 style="line-height: 10px; ">Se requiere urgente</h2>
 				</div>
 				<%= jobs(@presenter.last_jobs) %>
 				<p class="pull-right">
@@ -35,7 +57,7 @@
 			<div class="span6">
 				<!-- Ultimas ofertas de empleo -->
 				<div class="page-header">
-					<h2><i class="icon-time"></i> Ultimas ofertas de empleo</h2>
+					<h2 style="line-height: 10px; ">Ultimas ofertas de empleo</h2>
 				</div>
 				<%= jobs(@presenter.urgent_jobs) %>
 				<p class="pull-right">
@@ -45,15 +67,6 @@
 		</div>
 	</div>
 	<div class="span4">
-		<!--Sidebar content-->
-		<div>
-			<!--Buscadores de talentos -->
-			<h2><i class="icon-bullhorn"></i> Buscadores de talentos!</h2>
-			<p>
-				<span class="help-block">¿Está buscando un desarrollador de software? Bueno, tú has venido al lugar correcto.</span>
-				<%= link_to "Publicar oferta de trabajo", new_job_path, :class => "btn btn-info"%>
-			</p>
-		</div>
 		<!-- Mantengase actualizado -->
 		<div class="well" style="padding: 8px 0;">
 			<ul class="nav nav-list">
@@ -69,15 +82,47 @@
 				<li>
 					<a href="#"><i class="icon-linkedin"></i> Linkedin</a>
 				</li>
-				<li>
-					<a href="#"><i class="icon-google-plus"></i> Google plus</a>
+			</ul>
+		</div>
+		<!-- Buscadores de talentos -->
+		<div>
+			<div class="page-header">
+            	<h3 style="line-height: 10px; ">Buscadores de talentos!</h3>
+          	</div>
+			<p>
+				<span class="help-block">¿Está buscando un desarrollador de software? Bueno, tú has venido al lugar correcto.</span>
+				<%= link_to "Publicar oferta de trabajo", new_job_path, :class => "btn btn-success"%>
+			</p>
+		</div>
+		<!-- Estudiantes, Personas sin experiencia -->
+		<div>
+			<div class="page-header">
+            	<h3 style="line-height: 10px; ">Estudiantes y recien graduados</h3>
+          	</div>
+			<ul class="thumbnails">
+				<li class="span12">
+					<div class="thumbnail">
+						<div style="text-align: center;">
+							<%= image_tag("stundents.jpg", :class=> 'img-polaroid' ) %>
+						</div>
+						<div class="caption">
+							<p>
+								Buscar pasantías y empleos para estudiantes. ¿Qué tipo de trabajo estás buscando?
+							</p>
+							<p>
+								<%= link_to "Ver ofertas de #{@presenter.random_company.company_name}...", jobs_path({:company_name => @presenter.random_company.company_name}) %>
+							</p>
+						</div>
+					</div>
 				</li>
 			</ul>
 		</div>
 		<% unless @presenter.random_company.nil? %>
 		<div>
 			<!-- Empresas destacadas -->
-			<h2><i class="icon-thumbs-up"></i> Empresas destacadas</h2>
+			<div class="page-header">
+            	<h3 style="line-height: 10px; ">Empresas destacadas</h3>
+          	</div>
 			<ul class="thumbnails">
 				<li class="span12">
 					<div class="thumbnail">

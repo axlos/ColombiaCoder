@@ -16,9 +16,5 @@ class Jobs::IndexPresenter
   def top_skills
     Technology.top_skilss
   end
-  
-  def top_geonames
-    Job.top_geonames
-  end
 
 end

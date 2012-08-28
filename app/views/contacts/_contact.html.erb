@@ -39,8 +39,8 @@
 		<em class="muted">Sin dirección</em>
 	<% end %>
 	<br>
-	<% if contact.geoname.present? %>
-		<%= contact.geoname %>
+	<% if contact.location.present? %>
+		<%= contact.location %>
 	<% else  %>
 		<em class="muted">Sin localización de la empresa</em>
 	<% end %>

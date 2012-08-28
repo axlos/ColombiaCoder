@@ -4,8 +4,7 @@ Colombiandeveloper::Application.routes.draw do
 
   resources :jobs do
     put :post, on: :member
-    put :close, on: :member
-    put :republish, on: :member
+    put :expire, on: :member
     get :admin, on: :collection
     get :preview, on: :member
   end

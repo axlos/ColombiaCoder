@@ -69,34 +69,6 @@ $('#job_company_description, #job_job_description').wysihtml5({
   "image": false #Button to insert an image. Default true
 })
 
-# autocomplete de ciudades, ver: http://www.geonames.org/
-# autocomplete de tecnologias, ver: http://www.linkedin.com/ta/skill
-jobGeoname = $('#job_geoname_id')
-
-jobGeoname.ajaxChosen({
-  url: 'http://ws.geonames.org/searchJSON',
-  dataType: 'jsonp',
-  minTermLength: 1,
-  jsonTermKey: 'name_startsWith',
-  data: {
-    country: "CO",
-    featureClass: "P",
-    maxRows: 5,
-    lang: "es",
-    type: "json"
-  },
-}, (data) ->
-  terms = {};
-  $.each(data.geonames, (i, item) ->
-    terms[item.geonameId] = item.name + (if item.adminName1 then ", " + item.adminName1 else "") + ", " + item.countryName 
-  );
-  return terms;
-).change( ->
-  # Set el geonameId data json a el hidden que guardara el valor
-  #$("#job_geoname_id").val(jobGeoname.val())
-  $("#job_geoname").val($('#job_geoname_id option:selected').text())
-)
-
 # Depende del valor que seleccione del checkbox cambia el hidden para ser guardado
 $("#no_experience_required").bind 'click', (event) =>
   $("#job_no_experience_required").val($("#no_experience_required").is(':checked'))

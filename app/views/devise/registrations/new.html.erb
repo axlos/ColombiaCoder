@@ -1,15 +1,41 @@
-<h2>Crear una nueva cuenta</h2>
-<p>
-  Por favor, introduzca su dirección de correo electrónico en el siguiente formulario y le enviaremos un mensaje para ayudar a restablecer la contraseña.
-</p>
-<br />
-<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-<%= f.error_notification %>
-<div class="form-inputs">
-	<%= f.input :email, :required => true, :autofocus => true, :hint => 'Este será su nombre de usuario.' %>
-	<%= f.input :password, :required => true, :hint => 'Al menos 7 caracteres, por favor' %>
-	<%= f.input :password_confirmation, :required => true %>
+<div class="row-fluid">
+	<div class="span12">
+		<h2>Regístrate</h2>
+		<p>
+			Su empresa podrá publicar sus ofertas de empleo gratis, crear una página web con los datos de su empresa , y buscar entre miles de currículos a los mejores profesionales del país.
+		</p>
+	</div>
 </div>
-<%= f.button :submit, "Sign up" %>
-<% end %>
-<%= render "devise/shared/links" %>
+<br />
+<div class="row-fluid">
+	<div class="span8" style="text-align: center;">
+		<%= image_tag("google.jpg", :class=> 'img-polaroid' ) %>
+		<div class="alert alert-info">
+			<h3>Por que publicar en colombiandeveloper?</h3>
+			<br />
+			<ul>
+				<li>
+					Publicacion de la oferta laboral durante 30 días en colombiandeveloper.com.
+				</li>
+				<li>
+					Un correo electrónico automático a nuestra lista de suscripción de solicitantes de empleo.
+				</li>
+				<li>
+					Un portal dedicado exclusivamente a encontrar talentos en software en Colombia.
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="span4">
+		<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+		<%= f.error_notification %>
+		<div class="form-inputs">
+			<%= f.input :email, :required => true, :autofocus => true, :hint => 'Este será su nombre de usuario.' %>
+			<%= f.input :password, :required => true, :hint => 'Al menos 7 caracteres, por favor' %>
+			<%= f.input :password_confirmation, :required => true %>
+		</div>
+		<%= f.button :submit, 'Iniciar sesión', :class => 'btn btn-primary' %>
+		<% end %>
+		<%= render "devise/shared/links" %>
+	</div>
+</div>
