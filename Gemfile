@@ -8,7 +8,6 @@ gem 'heroku'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'
-  gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
 end
 
 group :production do
@@ -41,6 +40,7 @@ gem 'devise'
 gem 'sunspot_rails'
 gem 'kaminari'
 gem 'sunspot_with_kaminari'
+gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
 # ProgressBar is a simple Ruby library for displaying progress of long-running tasks on the console.
 gem 'progress_bar'
 
