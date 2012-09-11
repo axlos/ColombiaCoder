@@ -20,6 +20,8 @@ class JobsController < ApplicationController
       # buscar por skills
       fulltext params[:skill] do
         fields(:technologies)
+        fields(:job_title)
+        fields(:job_description)
       end
       # Salario negociable
       with(:salary_negotiable, params[:job][:salary_negotiable] == 'true') if params[:job][:salary_negotiable].present?

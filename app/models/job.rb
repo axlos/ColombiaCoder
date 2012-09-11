@@ -11,17 +11,20 @@ class Job < ActiveRecord::Base
   belongs_to :user
   has_many :technologies, dependent: :destroy, :inverse_of => :job
   has_and_belongs_to_many :job_types
-
+  # logotipo de la empresa
+  has_attached_file :company_logo, :styles => { :medium => ["260x180>", :png], :thumb => ["160x120>", :png] }
+   
   #reject_if evita que se envien tecnolias en blanco
   accepts_nested_attributes_for :technologies, :allow_destroy => true, :reject_if => proc { |attributes| attributes['name'].blank? }
 
   attr_accessible :location, :application_details, :company_description, :company_logo, :company_name, :company_web_site, :email_address, :no_experience_required, :job_description, :job_title, :resume_directly, :salary_negotiable, :salary_range_fin, :salary_range_ini, :status, :user_id, :job_type_ids, :technologies_attributes, :technology_ids
     
-  validates :company_name, :company_description, :job_title, :location, :presence => true
+  validates :company_name, :company_description, :job_title, :job_description, :location, :job_types, :presence => true
   validates_format_of :company_web_site, :with => URI::regexp(%w(http https))
-  
-  has_attached_file :company_logo, :styles => { :medium => ["260x180>", :png], :thumb => ["160x120>", :png] }
-  
+  # Validar como aplicar a la oferta de empleo
+  validates :email_address, :email => true, :if => :resume_directly?
+  validates_presence_of :application_details, :if => :application_details?
+  # validar tipo de archivo de imagen y tamanio
   validates_attachment :company_logo, :content_type => { :content_type => ['image/jpeg', 'image/png', 'image/gif'] }, :size => { :in => 0..200.kilobytes }
 
   default_scope order('created_at desc')
@@ -30,9 +33,24 @@ class Job < ActiveRecord::Base
   scope :posted, where( status: 2 )
   scope :recent, order('created_at desc' )
   
+  def resume_directly?
+    if self.resume_directly
+       self.email_address.blank?
+    end
+  end
+  
+  def application_details?
+    unless self.resume_directly
+       self.application_details.blank?
+    end
+  end
+
   searchable :auto_index => true, :auto_remove => true do
     # fulltext search location
     text :location, :boost => 5
+    text :job_title
+    text :job_description
+    
     # fulltext skills
     text :technologies, :boost => 5 do
       technologies.map { |skill| skill.name }

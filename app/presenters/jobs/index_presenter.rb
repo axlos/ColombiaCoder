@@ -5,7 +5,7 @@ class Jobs::IndexPresenter
   end
 
   def urgent_jobs
-    Job.posted.last_jobs(4)
+    Job.posted.urgent_jobs(4)
   end
 
   def random_company

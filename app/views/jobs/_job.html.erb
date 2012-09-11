@@ -45,7 +45,7 @@
 			</dd>
 			<% else %>
 			<dd>
-				<%= number_to_currency(job.salary_range_ini).concat(' - ').concat(number_to_currency(job.salary_range_fin)) %>
+				<%= number_to_currency(job.salary_range_ini, :locale => :es_CO).concat(' - ').concat(number_to_currency(job.salary_range_fin, :locale => :es_CO)) %>
 			</dd>
 			<% end%>
 		</dl>
@@ -94,26 +94,15 @@
 		</div>
 	</div>
 	<% else %>
-		<%= button_tag "Aplicar", :disable_with => "Please wait...", :class => 'btn btn-success btn-large', 'data-toggle' => 'modal', 'data-target' => '#myModal' %>
+		<div class="row-fluid">
+		<div class="span12">
+			<div class="well">
+				<h3>Como aplicar a la oferta laboral</h3>
+				<p>
+					Enviar hoja de vida al correo electronico: <%= job.email_address %>
+				</p>
+			</div>
+		</div>
+	</div>
 	<% end %>
 <% end %>
-
-<div id="myModal" class="modal hide fade">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-			&times;
-		</button>
-		<h3><%= job.job_title.titleize %></h3>
-	</div>
-	<div class="modal-body">
-		<p>
-			<%= form_tag jobs_path, :method => :get, :class => 'well well-large form-search' do %>
-				
-			<% end %>
-		</p>
-	</div>
-	<div class="modal-footer">
-		<a href="#" class="btn btn-primary">Aceptar</a>
-		<a href="#" class="btn" data-dismiss="modal">Close</a>
-	</div>
-</div>

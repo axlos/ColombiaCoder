@@ -1,5 +1,5 @@
 <div class="page-header">
-	<h3>Informacion de contacto</h3>
+	<h3>Información de contacto</h3>
 </div>
 <address>
 	<% if contact.full_name.present? %>
@@ -42,7 +42,7 @@
 	<% if contact.location.present? %>
 		<%= contact.location %>
 	<% else  %>
-		<em class="muted">Sin localización de la empresa</em>
+		<em class="muted">Sin Ciudad</em>
 	<% end %>
 </address>
 <%= link_to 'Editar informacion de contacto', edit_contact_path(contact.id) %>

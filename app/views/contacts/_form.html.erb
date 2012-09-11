@@ -2,13 +2,13 @@
   <%= f.input :full_name, :class => 'text_field' %>
   <%= f.input :email, :class => 'text_field' %>
   <%= f.input :company, :class => 'text_field' %>
-  <%= f.input :web_site, :class => 'text_field', :hint => 'ej. http://www.colombiandeveloper.com' %>
-  <%= f.input :location, :class => 'text_field', :hint => 'ej. Bogotá, Medellin, Cali, etc.' %>
+  <%= f.input :web_site, :class => 'text_field' %>
+  <%= f.input :location, :class => 'text_field' %>
   <%= f.input :street_address, :class => 'text_field' %>
   <%= f.input :phone, :class => 'text_field' %> 
   
   <div class="form-actions">
-  	<%= f.button :submit, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")), admin_jobs_path, :class => 'btn' %>
+  	<%= f.button :submit, 'Actualizar', :class => 'btn btn-primary' %>
+    <%= link_to 'Cancelar', admin_jobs_path, :class => 'btn' %>
   </div>
 <% end %>

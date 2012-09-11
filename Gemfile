@@ -1,14 +1,18 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.6'
+gem 'rails'
+gem 'heroku'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-group :development do
+group :development, :test do
   gem 'sqlite3', '1.3.5'
 end
 
+group :production do
+  gem 'sqlite3', '1.3.5'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -16,21 +20,20 @@ group :assets do
   gem 'sass-rails',   '3.2.4'
   gem 'coffee-rails', '3.2.2'
   gem 'uglifier', '1.2.3'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-  
-  gem 'twitter-bootstrap-rails'
-  gem 'client_side_validations'
-  gem 'simple_form', '2.0'
-  gem 'country_select'
-  gem "bootstrap-wysihtml5-rails"
-  gem 'jquery-ui-rails'
 end
 
-gem 'jquery-rails', '2.0.0'
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer', :platforms => :ruby
+gem 'twitter-bootstrap-rails'
+gem 'client_side_validations'
+gem 'simple_form', '2.0'
+gem 'country_select'
+gem 'bootstrap-wysihtml5-rails'
+gem 'jquery-ui-rails'
+
+gem 'jquery-rails'
 # Para redimencionar las imagenes
-gem "paperclip", "~> 3.0"
+gem 'paperclip', "~> 3.0"
 # Authentication
 gem 'devise'
 # Sunspot is a Ruby library for expressive, powerful interaction with the Solr search engine. 
