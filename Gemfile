@@ -11,6 +11,7 @@ group :development, :test do
 end
 
 group :production do
+  gem 'thin'
   gem 'sqlite3', '1.3.5'
 end
 
@@ -30,7 +31,6 @@ gem 'simple_form', '2.0'
 gem 'country_select'
 gem 'bootstrap-wysihtml5-rails'
 gem 'jquery-ui-rails'
-
 gem 'jquery-rails'
 # Para redimencionar las imagenes
 gem 'paperclip', "~> 3.0"

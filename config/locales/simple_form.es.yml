@@ -1,0 +1,68 @@
+es:
+  simple_form:
+    "yes": 'Si'
+    "no": 'No'
+    required:
+      text: 'requerido'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: Verifique los datos ingresados
+    labels:
+      user:
+        email: Email
+        password: Contraseña
+        password_confirmation: Confirmar contraseña
+        remember_me: Recordar contraseña
+        current_password: Contraseña actual
+      contact:
+        company: Empresa
+        email: Email
+        full_name: Nombre completo
+        phone: Teléfono
+        street_address: Dirección
+        web_site: Sitio web
+        location: Ciudad
+      job:
+        company_name: Empresa
+        company_web_site: Sitio web
+        company_description: Descripción de la empresa
+        job_title: Titulo de trabajo
+        location: Ciudad
+        job_description: Descripción de la oferta
+        technologies: Conocimientos técnicos
+        job_types: Tipo de contrato
+        email_address: Email
+        application_details: Como aplicar? 
+    hints:
+      user:
+        email: Este será su nombre de usuario
+        password: Al menos 7 caracteres, por favor
+        current_password: Contraseña actual
+      contact:
+        web_site: ej. http://www.colombiandeveloper.com
+        location: ej. Bogotá, Medellin, Cali, etc.
+      job:
+        company_web_site: ej. http://www.colombiandeveloper.com
+        company_description: Describe en pocas palabras la actividad de la empresa
+        job_title: ej. Ingeniero de desarrollo senior Java
+        location: Lugar donde se sitúa la oferta laboral, ej. Bogotá, Medellin, Cali, etc.
+        technologies: Ingrese los conocimientos técnicos mínimos que debe cumplir el candidato para aplicar a la oferta laboral, ej. Java, Ruby on Rails, .Net, Oracle, etc.
+    placeholders:
+      user:
+        email: usuario@dominio.com
+    # Labels and hints examples
+    # labels:
+    #   defaults:
+    #     password: 'Password'
+    #   user:
+    #     new:
+    #       email: 'E-mail to sign in.'
+    #     edit:
+    #       email: 'E-mail.'
+    # hints:
+    #   defaults:
+    #     username: 'User name to sign in.'
+    #     password: 'No special characters, please.'
