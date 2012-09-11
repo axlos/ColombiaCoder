@@ -49,8 +49,7 @@
 						</div>
 					<% else %>
 						<div class="pull-right" style="padding-top: 16px;">
-							<div class="btn-toolbar" style="margin: 0;">
-							  <div class="btn-group">
+							<div class="btn-group">
 							  	<%= link_to (current_user.contact.full_name.presence || current_user.contact.email.presence), edit_contact_path(current_user.contact.id) %>
 							  </div>
 				              <div class="btn-group">
@@ -62,7 +61,6 @@
 				              <div class="btn-group">
 				                <%= link_to "Salir", destroy_user_session_path, :method => :delete %>
 				              </div>
-				            </div>
 						</div>
 					<% end %>
 				</div>
