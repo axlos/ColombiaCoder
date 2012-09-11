@@ -25,6 +25,7 @@
 		<![endif]-->
 
 		<%= stylesheet_link_tag "application", :media => "all" %>
+		<%= stylesheet_link_tag "chosen", :media => "all" %>
 
 		<link href="images/favicon.ico" rel="shortcut icon">
 		<link href="images/apple-touch-icon.png" rel="apple-touch-icon">
@@ -62,9 +63,6 @@
 						<ul class="nav">
 							<li>
 								<%= link_to 'Búsqueda de ofertas laborales', jobs_path %>
-							</li>
-							<li>
-								<%= link_to 'Contáctenos', jobs_path %>
 							</li>
 						</ul>
 						<% if user_signed_in? %>
