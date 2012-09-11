@@ -39,6 +39,8 @@ gem 'paperclip', "~> 3.0"
 gem 'devise'
 # Sunspot is a Ruby library for expressive, powerful interaction with the Solr search engine. 
 gem 'sunspot_rails'
+gem 'kaminari'
+gem 'sunspot_with_kaminari'
 # ProgressBar is a simple Ruby library for displaying progress of long-running tasks on the console.
 gem 'progress_bar'
 
