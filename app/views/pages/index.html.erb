@@ -23,24 +23,24 @@
 		</div>
 		<%= form_tag jobs_path, :method => :get, :class => 'well well-custom form-search' do %>
 			<div class="input-prepend">
-				<span class="add-on"><i class="icon-search"></i></span><%= text_field_tag 'skill', '', :class => 'input-xlarge search-query', :placeholder=>'ej. java' %>
+				<span class="add-on"><i class="icon-search"></i></span><%= text_field_tag 'skill', '', :class => 'input-xlarge', :placeholder=>'ej. Java, .Net, Oracle, Web Design' %>
 			</div>
 			<div class="input-prepend">
-				<span class="add-on"><i class="icon-search"></i></span><%= text_field_tag 'job[location]', '', :class => 'input-xlarge search-query', :placeholder=>'ej. Bogotá, Bogotá D.C., Colombia' %>
+				<span class="add-on"><i class="icon-search"></i></span><%= text_field_tag 'job[location]', '', :class => 'input-xlarge', :placeholder=>'ej. Bogotá, Medellin, Cali' %>
 			</div>
-			<%= button_tag "Buscar", :disable_with => "Buscando...", :class => 'btn btn-primary' %>
+			<%= button_tag "Buscar", :class => 'btn btn-primary' %>
 		<% end %>
 		<p>
 			<strong>Tecnologias: </strong>
-			<%= @presenter.top_skills.map do |skill|
-          		link_to skill, jobs_path({:skill => skill.name})
+			<%= @presenter.top_skill.map do |skill|
+          		link_to skill, jobs_path({:skill => skill})
         		end.to_sentence(:words_connector => ' - ', :last_word_connector => ' - ').html_safe %>
 		</p>
 		<div class="row-fluid">
 			<div class="span6">
 				<!-- Ofertas de empleo urgentes -->
 				<div class="page-header">
-					<h2 style="line-height: 10px; ">Ofertas de empleo urgentes</h2>
+					<h3 style="line-height: 10px; ">Ofertas de empleo urgentes</h3>
 				</div>
 				<%= jobs(@presenter.urgent_jobs) %>
 				<p class="pull-right">
@@ -50,7 +50,7 @@
 			<div class="span6">
 				<!-- Ultimas ofertas de empleo -->
 				<div class="page-header">
-					<h2 style="line-height: 10px; ">Ultimas ofertas de empleo</h2>
+					<h3 style="line-height: 10px; ">Ultimas ofertas de empleo</h3>
 				</div>
 				<%= jobs(@presenter.last_jobs) %>
 				<p class="pull-right">
@@ -103,7 +103,7 @@
 								Buscamos hoy a los ingenieros del mañana!. ¿Qué tipo de trabajo está buscando?
 							</p>
 							<p>
-								<%= link_to "Ver ofertas de #{@presenter.random_company.company_name}...", jobs_path({:company_name => @presenter.random_company.company_name?}) if @presenter.random_company.present?%>
+								<%= link_to "Ver ofertas laborales para estudiantes...", jobs_path({:no_experience_required => true}) %>
 							</p>
 						</div>
 					</div>
@@ -120,7 +120,7 @@
 				<li class="span12">
 					<div class="thumbnail">
 						<div style="text-align: center;">
-							<%= link_to image_tag(@presenter.random_company.company_logo.url(:medium)), jobs_path({:company_name => @presenter.random_company.company_name}) %>
+							<%= link_to image_tag(@presenter.random_company.company_logo_url), jobs_path({:company_name => @presenter.random_company.company_name}) %>
 						</div>
 						<div class="caption">
 							<h5><%= @presenter.random_company.company_name %></h5>

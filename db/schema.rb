@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120826194009) do
+ActiveRecord::Schema.define(:version => 20120912015336) do
 
   create_table "contacts", :force => true do |t|
     t.string   "full_name"
@@ -43,27 +43,24 @@ ActiveRecord::Schema.define(:version => 20120826194009) do
   add_index "job_types_jobs", ["job_type_id", "job_id"], :name => "index_job_types_jobs_on_job_type_id_and_job_id"
 
   create_table "jobs", :force => true do |t|
-    t.string   "company_name",                                   :null => false
+    t.string   "company_name",                                :null => false
     t.string   "company_web_site"
-    t.text     "company_description",                            :null => false
-    t.string   "job_title",                                      :null => false
-    t.text     "job_description",                                :null => false
-    t.boolean  "salary_negotiable",         :default => false
-    t.integer  "salary_range_ini",          :default => 2000000
-    t.integer  "salary_range_fin",          :default => 3500000
-    t.boolean  "resume_directly",           :default => true
+    t.text     "company_description",                         :null => false
+    t.string   "job_title",                                   :null => false
+    t.text     "job_description",                             :null => false
+    t.boolean  "salary_negotiable",      :default => false
+    t.integer  "salary_range_ini",       :default => 2000000
+    t.integer  "salary_range_fin",       :default => 3500000
+    t.boolean  "resume_directly",        :default => true
     t.string   "email_address"
     t.text     "application_details"
-    t.datetime "created_at",                                     :null => false
-    t.datetime "updated_at",                                     :null => false
-    t.string   "company_logo_file_name"
-    t.string   "company_logo_content_type"
-    t.integer  "company_logo_file_size"
-    t.datetime "company_logo_updated_at"
-    t.integer  "status",                    :default => 1,       :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.integer  "status",                 :default => 1,       :null => false
     t.integer  "user_id"
-    t.boolean  "no_experience_required",    :default => false
-    t.string   "location",                  :default => "",      :null => false
+    t.boolean  "no_experience_required", :default => false
+    t.string   "location",               :default => "",      :null => false
+    t.string   "company_logo_url"
   end
 
   add_index "jobs", ["user_id"], :name => "index_jobs_on_user_id"

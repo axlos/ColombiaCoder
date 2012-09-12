@@ -25,7 +25,6 @@
 		<![endif]-->
 
 		<%= stylesheet_link_tag "application", :media => "all" %>
-		<%= stylesheet_link_tag "chosen", :media => "all" %>
 
 		<link href="images/favicon.ico" rel="shortcut icon">
 		<link href="images/apple-touch-icon.png" rel="apple-touch-icon">
@@ -40,12 +39,12 @@
 						<%= image_tag('colombiandeveloper.png') %>
 					</div>
 					<% unless user_signed_in? %>
-						<div class="pull-right" style="margin-top: 20px;">
-							<%= simple_form_for('user', :url => user_session_path, :html => { :class => 'form-inline', :style=> 'margin-bottom: 0px;' }) do |f| %>  
+						<div class="pull-right" style="margin-top: 40px;">
+							<%= simple_form_for('user', :url => user_session_path, :html => { :class => 'form-inline' }) do |f| %>  
 						    	<%= f.text_field :email, :class => 'input-medium', :required => false, :label => false, :placeholder => 'usuario@dominio.com'%>
 						    	<%= f.password_field :password, :class => 'input-medium', :required => false, :label => false, :placeholder => 'Contraseña' %>
-						    	<%= f.submit 'Iniciar sesión', :class=>"btn" %>
-						    	<%= link_to 'Crear una cuenta', new_user_registration_path, :class=>"btn btn-primary" %>
+						    	<%= f.submit 'Iniciar sesión', :class => 'btn', :style => 'margin-top: 0px;' %>
+						    	<%= link_to 'Crear una cuenta', new_user_registration_path, :class => 'btn btn-primary', :style => 'margin-top: 0px;' %>
 					    	<% end %>
 						</div>
 					<% end %>
@@ -68,7 +67,7 @@
 						<% if user_signed_in? %>
 							<ul class="nav pull-right">
 		                   		<li class="dropdown">
-		                        	<a href="#" class="dropdown-toggle btn-success" data-toggle="dropdown"><%= (current_user.contact.full_name.presence || current_user.contact.email.presence) %> <b class="caret"></b></a>
+		                        	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= (current_user.contact.full_name.presence || current_user.contact.email.presence) %> <b class="caret"></b></a>
 		                        	<ul class="dropdown-menu">
 		                          		<li><%= link_to "Mis ofertas laborales", admin_jobs_path %></li>
 		                          		<li><%= link_to "Editar cuenta", edit_user_registration_path %></li>

@@ -7,9 +7,11 @@ class Technology < ActiveRecord::Base
   
   default_scope :order => 'created_at'
   
-  # TODO: Mirar como mejorar para sacar los 6 skills mas ofertados
-  scope :top_skilss, :limit => 6, :group => "id,name"
-  
+  def self.top_skills(limit)
+    # seleccionar las tecnologias mas seleccionadas y convertir resultado en un map con solo los nombres
+    connection.select_all("select skill.name as name from (select name, count(*) from technologies group by name order by 2 desc limit #{limit}) as skill").map(&:values).flatten
+  end
+    
   def to_s
     name
   end

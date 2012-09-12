@@ -83,6 +83,7 @@ class JobsController < ApplicationController
         @job.company_description = job_last.company_description
         @job.company_name = job_last.company_name
         @job.company_web_site = job_last.company_web_site
+        @job.company_logo_url = job_last.company_logo_url
         @job.application_details = job_last.application_details if job_last.application_details
         @job.resume_directly = job_last.resume_directly
       end

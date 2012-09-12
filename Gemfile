@@ -25,21 +25,21 @@ group :assets do
 end
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', :platforms => :ruby
+gem 'therubyracer', :platforms => :ruby
 gem 'twitter-bootstrap-rails'
 gem 'client_side_validations'
-gem 'simple_form', '2.0'
-gem 'country_select'
+gem 'simple_form'
 gem 'bootstrap-wysihtml5-rails'
 gem 'jquery-ui-rails'
-gem 'jquery-rails'
-# Para redimencionar las imagenes
-gem 'paperclip', "~> 3.0"
+gem 'jquery-rails', '~> 2.1'
 # Authentication
 gem 'devise'
 # Sunspot is a Ruby library for expressive, powerful interaction with the Solr search engine. 
 gem 'sunspot_rails'
 # ProgressBar is a simple Ruby library for displaying progress of long-running tasks on the console.  gem 'progress_bar'
+
+# Para redimencionar las imagenes
+# gem 'paperclip', '3.2.0'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

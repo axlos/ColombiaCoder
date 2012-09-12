@@ -37,5 +37,5 @@ Colombiandeveloper::Application.configure do
   config.assets.debug = true
   
   # Image Processor
-  Paperclip.options[:command_path] = "/usr/local/bin/"
+  #Paperclip.options[:command_path] = "/usr/local/bin/"
 end

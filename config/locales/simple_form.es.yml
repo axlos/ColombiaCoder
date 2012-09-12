@@ -28,6 +28,7 @@ es:
       job:
         company_name: Empresa
         company_web_site: Sitio web
+        company_logo_url: Logotipo de la empresa
         company_description: Descripción de la empresa
         job_title: Titulo de trabajo
         location: Ciudad
@@ -47,6 +48,7 @@ es:
       job:
         company_web_site: ej. http://www.colombiandeveloper.com
         company_description: Describe en pocas palabras la actividad de la empresa
+        company_logo_url: URL que contiene el logotipo de la empresa (GIF, JPG, PNG)
         job_title: ej. Ingeniero de desarrollo senior Java
         location: Lugar donde se sitúa la oferta laboral, ej. Bogotá, Medellin, Cali, etc.
         technologies: Ingrese los conocimientos técnicos mínimos que debe cumplir el candidato para aplicar a la oferta laboral, ej. Java, Ruby on Rails, .Net, Oracle, etc.

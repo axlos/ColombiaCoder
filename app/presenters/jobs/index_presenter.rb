@@ -13,8 +13,8 @@ class Jobs::IndexPresenter
     @random_company ||= Job.random_company_with_logo
   end
   
-  def top_skills
-    Technology.top_skilss
+  def top_skill
+    Technology.top_skills(5)
   end
 
 end

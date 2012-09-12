@@ -10,21 +10,7 @@
 	</legend>
 	<%= f.input :company_name, :input_html => { :class => 'span12' } %>
 	<%= f.input :company_web_site, :input_html => { :class => 'span12' } %>
-	<div class="control-group">
-		<label class="string optional control-label">Logotipo de la empresa</label>
-		<div class="controls">
-			<% if @job.company_logo? %>
-			<div class="alert alert-info">
-				<a class="close" data-dismiss="alert" href="#">×</a>
-				<i class="icon-info-sign"></i> El logo de la empresa ya ha sido cargado!, puede cambiar la imagen haciendo click en "Seleccionar archivo".
-			</div>
-			<% end %>
-			<%= f.file_field :company_logo %>
-			<p class="help-block">
-				Logotipo de la empresa (GIF, JPG, PNG)
-			</p>
-		</div>
-	</div>
+	<%= f.input :company_logo_url, :input_html => { :class => 'span12' } %>
 	<%= f.input :company_description, :input_html => { :class => 'span12', :rows => 7 } %>
 </fieldset>
 <fieldset>
@@ -33,7 +19,7 @@
 	</legend>
 	<%= f.input :job_title, :input_html => { :class => 'span12' } %>
 
-	<%= f.input :location, :input_html => { :class => 'span12' } %>
+	<%= f.input :location, :input_html => { :class => 'span12', :value => 'Bogotá' }, :placeholder => 'Bogotá' %>
 
 	<%= f.input :job_description, :input_html => { :class => 'span12', :rows => 7 } %>
 	<%= f.association :technologies, :multiple => true, :input_html => { :class => 'span12' } %>
