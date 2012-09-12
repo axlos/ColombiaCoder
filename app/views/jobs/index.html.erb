@@ -54,12 +54,14 @@
 			<%= hidden_field_tag :order, params[:order] || 'last' %>
 			<!-- Nombre de empresa -->
 			<%= hidden_field_tag :company_name,  params[:company_name] %>
-			<%= button_tag(type: 'submit', :class => 'btn btn-primary', :name => nil, :disable_with => "Buscando...") do %>
-			    <i class=" icon-search"></i> Buscar
-			<% end %>
-			<div class="pull-right">
-				<%= link_to 'Ver todas' %>
+			<div class="form-actions" style="margin-top: 0px; margin-bottom: 0px;">
+				<div class="pull-right">
+					<%= button_tag(type: 'submit', :class => 'btn btn-primary', :name => nil ) do %>
+					    <i class=" icon-search"></i> Buscar
+					<% end %>
+				</div>
 			</div>
+			
 		</div>
 	</div>
 </div>

@@ -47,7 +47,7 @@
 			</dd>
 			<% else %>
 			<dd>
-				<%= number_to_currency(job.salary_range_ini, :locale => 'es-CO').concat(' - ').concat(number_to_currency(job.salary_range_fin, :locale => 'es-CO')) %>
+				<%= number_to_currency(job.salary_range_ini, :locale => :en, :unit => '$', :precision => 0).concat(' - ').concat(number_to_currency(job.salary_range_fin, :locale => :en,:unit => '$', :precision => 0)) %>
 			</dd>
 			<% end%>
 		</dl>
