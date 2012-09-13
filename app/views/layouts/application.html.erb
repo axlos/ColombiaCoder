@@ -36,7 +36,7 @@
 			<div style="background: #f5f5f5">
 				<div class="container">
 					<div class="pull-left">
-						<%= image_tag('colombiandeveloper.png') %>
+						<%= link_to image_tag('colombiandeveloper.png'), root_path %>
 					</div>
 					<% unless user_signed_in? %>
 						<div class="pull-right" style="margin-top: 40px;">
@@ -62,6 +62,11 @@
 						<ul class="nav">
 							<li>
 								<%= link_to 'Búsqueda de ofertas laborales', jobs_path %>
+							</li>
+							<li>
+								<!-- // MAILCHIMP SUBSCRIBE CODE \\ -->
+								<%= link_to 'Suscríbase a nuestro boletín', 'http://eepurl.com/pshxX' %>
+								<!-- \\ MAILCHIMP SUBSCRIBE LINK // -->
 							</li>
 						</ul>
 						<% if user_signed_in? %>
