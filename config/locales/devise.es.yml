@@ -25,7 +25,7 @@ es:
       signed_in: 'Ingreso exitoso.'
       signed_out: 'Has salido del sistema.'
     passwords:
-      send_instructions: 'Recibirás un correo electrónico con instrucciones sobre cómo reiniciar tu contraseña en unos minutos.'
+      send_instructions: 'Recibirás un correo electrónico sobre cómo reiniciar tu contraseña.'
       updated: 'Tu contraseña fue cambiada exitosamente y has sido ingresado al sistema.'
       updated_not_active: 'Tu contraseña se cambió exitosamente.'
       send_paranoid_instructions: "Si tu correo electrónico existe en nuestra base de datos, recibirás un enlace para reiniciar tu contraseña en unos minutos."
@@ -51,8 +51,8 @@ es:
       failure: 'No te pudimos autorizar en %{kind} debido a "%{reason}".'
     mailer:
       confirmation_instructions:
-        subject: 'Instrucciones de Confirmación'
+        subject: 'Colombiandeveloper: Instrucciones de confirmación'
       reset_password_instructions:
-        subject: 'Instrucciones de reinicio de contraseña'
+        subject: 'Colombiandeveloper: Instrucciones de reinicio de contraseña'
       unlock_instructions:
-        subject: 'Instrucciones de desbloqueo'
+        subject: 'Colombiandeveloper: Instrucciones de desbloqueo'

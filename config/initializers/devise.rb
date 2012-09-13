@@ -4,10 +4,10 @@ Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
-  config.mailer_sender = "please-change-me-at-config-initializers-devise@example.com"
+  config.mailer_sender = "contacto@colombiandeveloper.com"
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = "Devise::Mailer"
+  config.mailer = "Devise::Mailer"
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
@@ -23,7 +23,7 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  # config.authentication_keys = [ :email ]
+  config.authentication_keys = [ :email ]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -82,7 +82,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = "7e97f15d4995d45b14c9e6a190cd6500ad332ae2513584962a8ed81cc72d17c65f2d94ad95673a752f81873a7e62ae05b2a6920df868aaf46f15cde01cf612b2"
+  config.pepper = "7e97f15d4995d45b14c9e6a190cd6500ad332ae2513584962a8ed81cc72d17c65f2d94ad95673a752f81873a7e62ae05b2a6920df868aaf46f15cde01cf612b2"
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
