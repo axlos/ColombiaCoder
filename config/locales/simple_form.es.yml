@@ -12,14 +12,14 @@ es:
       default_message: Verifique los datos ingresados
     labels:
       user:
-        email: Email
+        email: Correo electrónico
         password: Contraseña
         password_confirmation: Confirmar contraseña
         remember_me: Recordar contraseña
         current_password: Contraseña actual
       contact:
         company: Empresa
-        email: Email
+        email: Correo electrónico
         full_name: Nombre completo
         phone: Teléfono
         street_address: Dirección
@@ -35,7 +35,7 @@ es:
         job_description: Descripción de la oferta
         technologies: Conocimientos técnicos
         job_types: Tipo de contrato
-        email_address: Email
+        email_address: Correo electrónico
         application_details: Como aplicar? 
     hints:
       user:

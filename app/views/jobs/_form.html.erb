@@ -58,7 +58,7 @@
 		<label class="control-label">Como aplicar</label>
 		<div class="controls">
 			<label class="radio"> <%= radio_button_tag 'job[resume_directly]', true, @job.resume_directly == true %>
-				Permitir que los candidatos adjunten su hoja de vida y se envíe directamente a un email</label>
+				Permitir que los candidatos adjunten su hoja de vida y se envíe directamente a un correo electrónico</label>
 			<%= f.input :email_address, :input_html => { :class => 'span12', :disabled => @job.resume_directly == false } %>
 			<label class="radio"> <%= radio_button_tag 'job[resume_directly]', false, @job.resume_directly == false %>
 				&#243;, detalle como aplicar a la oferta laboral</label>

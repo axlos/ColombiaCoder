@@ -39,7 +39,7 @@
 						<%= link_to image_tag('colombiandeveloper.png'), root_path %>
 					</div>
 					<% unless user_signed_in? %>
-						<div class="pull-right" style="margin-top: 40px;">
+						<div class="pull-right" style="margin-top: 35px;">
 							<%= simple_form_for('user', :url => user_session_path, :html => { :class => 'form-inline' }) do |f| %>  
 						    	<%= f.text_field :email, :class => 'input-medium', :required => false, :label => false, :placeholder => 'usuario@dominio.com'%>
 						    	<%= f.password_field :password, :class => 'input-medium', :required => false, :label => false, :placeholder => 'Contraseña' %>
