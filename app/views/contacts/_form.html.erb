@@ -1,12 +1,13 @@
 <%= simple_form_for @contact, :validate => true, :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.input :full_name, :class => 'text_field' %>
-  <%= f.input :email, :class => 'text_field' %>
-  <%= f.input :company, :class => 'text_field' %>
-  <%= f.input :web_site, :class => 'text_field' %>
-  <%= f.input :location, :class => 'text_field' %>
-  <%= f.input :street_address, :class => 'text_field' %>
-  <%= f.input :phone, :class => 'text_field' %> 
-  
+  <div class="form-inputs">
+	  <%= f.input :full_name, :class => 'text_field' %>
+	  <%= f.input :email, :class => 'text_field' %>
+	  <%= f.input :company, :class => 'text_field' %>
+	  <%= f.input :web_site, :class => 'text_field' %>
+	  <%= f.input :location, :class => 'text_field' %>
+	  <%= f.input :street_address, :class => 'text_field' %>
+	  <%= f.input :phone, :class => 'text_field' %> 
+  </div>
   <div class="form-actions">
   	<%= f.button :submit, 'Actualizar', :class => 'btn btn-primary' %>
     <%= link_to 'Cancelar', admin_jobs_path, :class => 'btn' %>
