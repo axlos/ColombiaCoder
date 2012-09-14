@@ -40,7 +40,7 @@ class JobsController < ApplicationController
       order_by :created_at, :desc if params[:order] == 'last'
       order_by :created_at, :asc if params[:order] == 'urgent'
       # paginacion
-      paginate :per_page => 25
+      paginate :per_page => 20
       paginate :page => params[:page]
     end
     @jobs = search.results

@@ -8,19 +8,32 @@
 </div>
 <br />
 <div class="row-fluid">
-	<div class="span3">
+	<div class="span4">
 		<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
 			<% flash.each do |name, msg| %>
 				*<%= content_tag :div, msg, :class => 'alert alert-error' %>*
 			<% end %>
 			<%= f.error_notification %>
 			<div class="form-inputs">
-				<%= f.input :email, :required => true, :autofocus => true, :input_html => { :class => 'span12' } %>
-				<%= f.input :password, :required => true, :input_html => { :class => 'span12' } %>
-				<%= f.input :password_confirmation, :required => true, :input_html => { :class => 'span12' } %>
+				<%= f.input :email, :required => true, :autofocus => true, :input_html => { :class => 'input-large' } %>
+				<%= f.input :password, :required => true, :input_html => { :class => 'input-large' } %>
+				<%= f.input :password_confirmation, :required => true, :input_html => { :class => 'input-large' } %>
 			</div>
 			<%= f.button :submit, 'Iniciar sesión', :class => 'btn btn-primary' %>
 		<% end %>
 		<%= render "devise/shared/links" %>
+	</div>
+	<div class="span8">
+		<script type="text/javascript"><!--
+		google_ad_client = "ca-pub-9287817861975219";
+		/* COLDEV */
+		google_ad_slot = "5010532558";
+		google_ad_width = 336;
+		google_ad_height = 280;
+		//-->
+		</script>
+		<script type="text/javascript"
+		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
 	</div>
 </div>
