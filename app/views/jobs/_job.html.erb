@@ -9,9 +9,7 @@
 <% end %>
 <div class="row-fluid">
 	<div class="span9">
-		<div class="page-header">
-            <h3><%= job.job_title %></h3>
-       	</div>
+        <h3><%= job.job_title %></h3>
 		<p>
 			<% job.technologies.each do |skill| %>
 			<%= content_tag :span, skill.name, :class => 'label label-info' %>

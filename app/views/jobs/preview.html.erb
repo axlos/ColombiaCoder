@@ -23,8 +23,8 @@
 				</p>
 				<p>
 					<%= form_tag(@job) do -%>
-						<%= link_to 'Continuar editando', edit_job_path(@job), :class => 'btn btn-primary' %>
-						<%= button_tag(type: 'submit', :class => 'btn btn-success', :name => 'post_button') do %>
+						<%= link_to 'Continuar editando', edit_job_path(@job), :class => 'btn' %>
+						<%= button_tag(type: 'submit', :class => 'btn btn-primary', :name => 'post_button') do %>
 						    <i class=" icon-pencil"></i> Publicar oferta
 						<% end %>
 					<% end -%>

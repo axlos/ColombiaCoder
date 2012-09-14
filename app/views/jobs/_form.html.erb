@@ -19,7 +19,7 @@
 	</legend>
 	<%= f.input :job_title, :input_html => { :class => 'span12' } %>
 
-	<%= f.input :location, :input_html => { :class => 'span12', :value => 'Bogotá' }, :placeholder => 'Bogotá' %>
+	<%= f.input :location, :input_html => { :class => 'span12' }, :placeholder => 'Bogotá' %>
 
 	<%= f.input :job_description, :input_html => { :class => 'span12', :rows => 7 } %>
 	<%= f.association :technologies, :multiple => true, :input_html => { :class => 'span12' } %>
