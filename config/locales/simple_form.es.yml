@@ -34,7 +34,7 @@ es:
         location: Ciudad
         job_description: Descripción de la oferta
         technologies: Conocimientos técnicos
-        job_types: Tipo de contrato
+        job_types: Tipo de trabajo
         email_address: Correo electrónico
         application_details: Como aplicar? 
     hints:

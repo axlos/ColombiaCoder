@@ -39,6 +39,8 @@ class JobsController < ApplicationController
       # ordernar por fecha de creacion
       order_by :created_at, :desc if params[:order] == 'last'
       order_by :created_at, :asc if params[:order] == 'urgent'
+      # si no hay ningun orden por defecto ordenamos por la mas reciente
+      order_by :created_at, :desc unless params[:order].present?
       # paginacion
       paginate :per_page => 20
       paginate :page => params[:page]
