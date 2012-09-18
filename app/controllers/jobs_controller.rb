@@ -144,7 +144,11 @@ class JobsController < ApplicationController
   # PUT /jobs/1/post
   def post
     # Cambiar de estado a publicada
-    if update_status(params[:id], 2)
+    job = update_status(params[:id], 2)
+    if job
+      # Twitter oferta laboral
+      job.tweet!
+      # redireccionar oferta laboral
       redirect_to admin_jobs_url
     else
       render action: "show"
@@ -166,6 +170,8 @@ class JobsController < ApplicationController
     @job = Job.find(job_id)
     # Cambiar de estado la oferta laboral
     @job.update_attribute(:status, status)
+    # retornar oferta laboral
+    @job
   end
   
   def params_skills(params_skills, job_id)

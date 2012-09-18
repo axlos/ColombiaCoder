@@ -1,0 +1,6 @@
+development:
+  oauth_token: 829835840-jMzql7t0MMyijSZbs8nsNGqeV4KAI0D7jsl8LT4x
+  oauth_token_secret: 9dgaujuEUj3E8E2zLQK97KwYv63FiGF9wJ4E7e09HiY
+production:
+  oauth_token: 829835840-jMzql7t0MMyijSZbs8nsNGqeV4KAI0D7jsl8LT4x
+  oauth_token_secret: 9dgaujuEUj3E8E2zLQK97KwYv63FiGF9wJ4E7e09HiY

@@ -205,4 +205,4 @@ es:
         job:
           attributes:
             job_types:
-              blank: Seleccione al menos un tipo de contrato 
+              blank: Seleccione al menos un tipo de trabajo

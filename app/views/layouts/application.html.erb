@@ -28,11 +28,11 @@
 		<![endif]-->
 
 		<%= stylesheet_link_tag "application", :media => "all" %>
-
-		<link href="images/favicon.ico" rel="shortcut icon">
-		<link href="images/apple-touch-icon.png" rel="apple-touch-icon">
-		<link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
-		<link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+		
+		<link href="/assets/favicon.ico" rel="shortcut icon">
+		<link href="/assets/colombiandeveloper-icon.png" rel="colombiandeveloper-icon">
+		<link href="/assets/colombiandeveloper-icon-72x72.png" rel="colombiandeveloper-icon" sizes="72x72">
+		<link href="/assets/colombiandeveloper-icon-114x114.png" rel="colombiandeveloper-icon" sizes="114x114">
 	</head>
 	<body>		
 		<div class="navbar navbar-fixed-top">
@@ -40,7 +40,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="span3">
-							<%= link_to image_tag('colombiandeveloper.png'), root_path %>
+							<%= link_to image_tag('logo_colombiandeveloper.png'), root_path %>
 						</div>
 						<div class="span9">
 							<% unless user_signed_in? %>

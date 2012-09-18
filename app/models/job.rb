@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class Job < ActiveRecord::Base
   
   # Dias para que una oferta laboral caduque
@@ -22,8 +24,15 @@ class Job < ActiveRecord::Base
 
   attr_accessible :location, :application_details, :company_description, :company_name, :company_web_site, :email_address, :no_experience_required, :job_description, :job_title, :resume_directly, :salary_negotiable, :salary_range_fin, :salary_range_ini, :status, :user_id, :job_type_ids, :technologies_attributes, :technology_ids, :company_logo_url
     
+  validates :job_title, :length => { :maximum => 80 }
+  validates :location, :length => { :maximum => 20 }
+  
   validates :company_name, :company_description, :job_title, :job_description, :location, :job_types, :presence => true
-  validates_format_of :company_web_site, :with => URI::regexp(%w(http https))
+  
+  # Validar formatos de URL si existen
+  validates_format_of :company_web_site, :with => URI::regexp(%w(http https)), :if => :company_web_site?
+  validates_format_of :company_logo_url, :with => URI::regexp(%w(http https)), :if => :company_logo_url?
+  
   # Validar como aplicar a la oferta de empleo
   validates :email_address, :email => true, :if => :resume_directly?
   validates_presence_of :application_details, :if => :application_details?
@@ -94,5 +103,24 @@ class Job < ActiveRecord::Base
       end
     end
   end
+  
+  def tweet!
+    # Twitter oferta laboral
+    tweet_desc = "#Empleo en @colombiadev #{job_title} en #{location}"
+    shrunk_url = Job.tiny_url(134 - tweet_desc.length, "http://www.colombiandeveloper.com/jobs/#{id}")
+    
+    if tweet_desc.length > 134 - shrunk_url.length
+      tweet_desc = tweet_desc[0...(134 - shrunk_url.length)] + '...'
+    end
+    tweet = "#{tweet_desc} #{shrunk_url}"
+    Twitter.update tweet
+  end
  
+  def self.tiny_url(available_length, url)
+    string = "http://is.gd/api.php?longurl=" + CGI::escape(url)
+    open(string).read.strip
+  rescue StandardError => e
+    puts "Error in tiny_url: #{e.message}\n#{e.backtrace}"
+  end
+  
 end

@@ -17,9 +17,9 @@
 	<legend>
 		Información de la oferta laboral
 	</legend>
-	<%= f.input :job_title, :input_html => { :class => 'span12' } %>
+	<%= f.input :job_title, :input_html => { :class => 'span12', :maxlength => 80 } %>
 
-	<%= f.input :location, :input_html => { :class => 'span12' }, :placeholder => 'Bogotá' %>
+	<%= f.input :location, :input_html => { :class => 'span12', :maxlength => 20} %>
 
 	<%= f.input :job_description, :input_html => { :class => 'span12', :rows => 7 } %>
 	

@@ -47,14 +47,18 @@ es:
         location: ej. Bogotá, Medellin, Cali, etc.
       job:
         company_web_site: ej. http://www.colombiandeveloper.com
-        company_description: Describe en pocas palabras la actividad de la empresa
-        company_logo_url: URL que contiene el logotipo de la empresa (GIF, JPG, PNG)
+        company_logo_url: URL que contiene el logotipo de la empresa (GIF, JPG, PNG), ej. http://www.epm.com.co/site/images/emp/img_skins/epm.png
+        company_description: Describe en pocas palabras la actividad de la empresa 
         job_title: ej. Ingeniero de desarrollo senior Java
         location: Lugar donde se sitúa la oferta laboral, ej. Bogotá, Medellin, Cali, etc.
         technologies: Ingrese los conocimientos técnicos mínimos que debe cumplir el candidato para aplicar a la oferta laboral, ej. Java, Ruby on Rails, .Net, Oracle, etc.
     placeholders:
       user:
         email: usuario@dominio.com
+      job:
+        company_logo_url: http://
+        company_web_site: http://
+        location: Bogotá
     # Labels and hints examples
     # labels:
     #   defaults:
