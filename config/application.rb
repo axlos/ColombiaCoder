@@ -9,7 +9,7 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-module Colombiandeveloper
+module Colombiacoder
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -68,9 +68,9 @@ module Colombiandeveloper
     config.action_mailer.smtp_settings = { 
       :address => "smtpout.secureserver.net", 
       :port => 80,
-      :domain => 'colombiandeveloper.com',
-      :user_name => 'contacto@colombiandeveloper.com',
-      :password => 'Alexander28', 
+      :domain => 'colombiacoder.com',
+      :user_name => 'info@colombiacoder.com',
+      :password => 'x1nt0*n3f0r!',
       :authentication => 'plain', 
       :enable_starttls_auto => true
     }

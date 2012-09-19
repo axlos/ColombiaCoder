@@ -1,4 +1,4 @@
-Colombiandeveloper::Application.routes.draw do
+Colombiacoder::Application.routes.draw do
 
   devise_for :users, :controllers => {:registrations => "registrations"}
   

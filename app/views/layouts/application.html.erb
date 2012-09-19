@@ -16,8 +16,8 @@
 
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="Ofertas de empleo en software en Colombia. Publicación gratuita de ofertas laborales. Oportunidades laborales para la industria del software. " >
-		<meta name="keywords"content="ofertas de empleo en desarrollo, trabajo, empleos en software en colombia, trabajos, empleo, software, empleos, ofertas de trabajo, ofertas de empleo, tecnologias, colombia, portal de empleos, portal de trabajos, java, .net, c#, ruby, rails, pmp, oracle, php, desarrollador, ingeniero de desarrollo, programador, buscar programadores, desarrollador de software">
+		<meta name="description" content="Accede a cientos de oportunidades laborales en la industria del software en Colombia,Publicación gratuita de ofertas laborales." >
+		<meta name="keywords" content="bolsas de empleo,vacantes de empleo,ofertas de empleo,empleos medio tiempo,ofertas de trabajo,empleo,trabajo,trabajos,job,freelance,medio tiempo,php,java freelance,c# freelance,software,software developer,java developer,estudiantes universitarios,freelancer,coder,programadores,programar">
 
 		<title><%= content_for?(:title) ? yield(:title) : "Ofertas de empleo en Software - Colombia" %></title>
 		<%= csrf_meta_tags %>
@@ -30,9 +30,9 @@
 		<%= stylesheet_link_tag "application", :media => "all" %>
 		
 		<link href="/assets/favicon.ico" rel="shortcut icon">
-		<link href="/assets/colombiandeveloper-icon.png" rel="colombiandeveloper-icon">
-		<link href="/assets/colombiandeveloper-icon-72x72.png" rel="colombiandeveloper-icon" sizes="72x72">
-		<link href="/assets/colombiandeveloper-icon-114x114.png" rel="colombiandeveloper-icon" sizes="114x114">
+		<link href="/assets/colombiacoder-icon.png" rel="colombiacoder-icon">
+		<link href="/assets/colombiacoder-icon-72x72.png" rel="colombiacoder-icon" sizes="72x72">
+		<link href="/assets/colombiacoder-icon-114x114.png" rel="colombiacoder-icon" sizes="114x114">
 	</head>
 	<body>		
 		<div class="navbar navbar-fixed-top">
@@ -40,7 +40,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="span3">
-							<%= link_to image_tag('logo_colombiandeveloper.png'), root_path %>
+							<%= link_to image_tag('logo_colombiacoder.png'), root_path %>
 						</div>
 						<div class="span9">
 							<% unless user_signed_in? %>
@@ -102,8 +102,8 @@
 		<footer class="footer">
 			<div class="container">
 				<p style="text-align: center;">
-					Oportunidades laborales para la industria del software - &copy; Colombiandeveloper 2012<br/>
-					Teléfono: (57) (312) 2575823 - Bogotá - Colombia - Correo: contacto@colombiandeveloper.com
+					Oportunidades laborales para la industria del software - &copy; colombiaCoder 2012<br/>
+					Teléfono: (57) (312) 2575823 - Bogotá - Colombia - Correo: info@colombiacoder.com
 				</p>
 			</div>
 		</footer>

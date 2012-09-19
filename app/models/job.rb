@@ -107,7 +107,7 @@ class Job < ActiveRecord::Base
   def tweet!
     # Twitter oferta laboral
     tweet_desc = "#Empleo en @colombiadev #{job_title} en #{location}"
-    shrunk_url = Job.tiny_url(134 - tweet_desc.length, "http://www.colombiandeveloper.com/jobs/#{id}")
+    shrunk_url = Job.tiny_url(134 - tweet_desc.length, "http://www.colombiacoder.com/jobs/#{id}")
     
     if tweet_desc.length > 134 - shrunk_url.length
       tweet_desc = tweet_desc[0...(134 - shrunk_url.length)] + '...'

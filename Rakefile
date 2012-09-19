@@ -5,4 +5,4 @@
 require File.expand_path('../config/application', __FILE__)
 require 'sunspot/rails/tasks'
 
-Colombiandeveloper::Application.load_tasks
+Colombiacoder::Application.load_tasks

@@ -1,4 +1,4 @@
-Colombiandeveloper::Application.configure do
+Colombiacoder::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
@@ -50,7 +50,7 @@ Colombiandeveloper::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { :host => 'colombiandeveloper.com' }
+  config.action_mailer.default_url_options = { :host => 'colombiacoder.com' }
     
   # Enable threaded mode
   # config.threadsafe!
