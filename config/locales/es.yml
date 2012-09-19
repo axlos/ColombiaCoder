@@ -206,3 +206,17 @@ es:
           attributes:
             job_types:
               blank: Seleccione al menos un tipo de trabajo
+              
+  i18n:
+    transliterate:
+      rule:
+         á: a
+         é: e
+         í: i
+         ó: o
+         ú: u
+         Á: A
+         É: E
+         Í: I
+         Ó: O
+         Ú: U
