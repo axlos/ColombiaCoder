@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120912015336) do
+ActiveRecord::Schema.define(:version => 20120926165811) do
 
   create_table "contacts", :force => true do |t|
     t.string   "full_name"
@@ -72,6 +72,22 @@ ActiveRecord::Schema.define(:version => 20120912015336) do
 
   add_index "jobs_job_types", ["job_id", "job_type_id"], :name => "index_jobs_job_types_on_job_id_and_job_type_id"
   add_index "jobs_job_types", ["job_type_id", "job_id"], :name => "index_jobs_job_types_on_job_type_id_and_job_id"
+
+  create_table "seekers", :force => true do |t|
+    t.string   "name",                                  :null => false
+    t.string   "email",                                 :null => false
+    t.string   "cover_letter",                          :null => false
+    t.integer  "job_id"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.string   "resume_file_name"
+    t.string   "resume_content_type"
+    t.integer  "resume_file_size"
+    t.datetime "resume_updated_at"
+    t.boolean  "notification",        :default => true
+  end
+
+  add_index "seekers", ["job_id"], :name => "index_seekers_on_job_id"
 
   create_table "technologies", :force => true do |t|
     t.string   "name",       :null => false

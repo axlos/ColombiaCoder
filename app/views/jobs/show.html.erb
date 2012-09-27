@@ -21,12 +21,12 @@
 						Aquí está una vista previa de su oferta laboral. Puede editar nuevamente la informacion, luego puedes dar click en "Publicar oferta laboral" cuando estás satisfecho.
 					</p>
 					<p>
-						<%= link_to 'Editar', edit_job_path(@job), :class => 'btn btn-primary' %>
+						<%= link_to 'Editar', edit_job_path(@job), :class => 'btn' %>
 						<% if @job.status == 1 %>
-							<%= link_to 'Publicar oferta', '#confirmModal', :class => 'btn', :role => 'button', 'data-toggle' => 'modal' %>
+							<%= link_to 'Publicar oferta', '#confirmModal', :class => 'btn btn-success', :role => 'button', 'data-toggle' => 'modal' %>
 						<% end %>
 						<% if @job.status == 3 %>
-							<%= link_to 'Republicar oferta', post_job_path(@job), :class => 'btn', :method => :put %>
+							<%= link_to 'Republicar oferta', post_job_path(@job), :class => 'btn btn-info', :method => :put %>
 						<% end %>
 					</p>
 				</div>

@@ -40,8 +40,11 @@ gem 'sunspot_rails'
 # twitter API
 gem 'twitter'
 
-# Para redimencionar las imagenes
-# gem 'paperclip', '3.2.0'
+# Para subir archivos
+gem 'paperclip', '3.2.0'
+# Amazon web services
+gem 'aws-s3'
+gem 'aws-sdk'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

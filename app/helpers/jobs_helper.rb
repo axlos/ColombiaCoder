@@ -18,7 +18,7 @@ module JobsHelper
     content_tag :dl do
         # Descripcion de distancia de tiempo en palabras
         content_tag(:span, "Hace #{distance_of_time_in_words(Time.now, job.created_at)}", :class => 'pull-right') +
-        content_tag(:dt, (link_to job.job_title, job, :target => '_blank') + " - #{job.company_name}") + 
+        content_tag(:dt, (link_to job.job_title, job) + " - #{job.company_name}") + 
         content_tag(:dd, content_tag(:em, job.location)) +
         # Truncar descripcion de trabajo, quitar tags HTML
         content_tag(:dd, content_tag(:span, truncate(strip_tags(job.job_description), :length => 130), :class => 'muted')) +

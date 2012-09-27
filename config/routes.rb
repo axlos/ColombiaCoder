@@ -1,4 +1,4 @@
-Colombiacoder::Application.routes.draw do
+Colombiacoder::Application.routes.draw do  
 
   devise_for :users, :controllers => {:registrations => "registrations"}
   
@@ -11,6 +11,7 @@ Colombiacoder::Application.routes.draw do
     put :expire, on: :member
     get :admin, on: :collection
     get :preview, on: :member
+    post :apply, on: :member
   end
   
   resources :contacts, :only => [:index, :edit, :update]
