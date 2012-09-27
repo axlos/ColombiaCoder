@@ -65,4 +65,14 @@ Colombiacoder::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+  
+  Paperclip::Attachment.default_options.merge!(
+    :storage => 's3',
+    :s3_credentials => YAML.load_file("#{Rails.root}/config/s3.yml"),
+    :bucket => 'pdn.resume.colombiacoder',
+    :s3_permissions => :private,
+    :path => ":attachment/:id.:extension",
+    :url => "/:attachment/:id.:extension"
+  )
+  
 end

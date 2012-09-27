@@ -11,6 +11,12 @@ es:
     error_notification:
       default_message: Verifique los datos ingresados
     labels:
+      seeker: &seeker_labels
+        name: Nombre
+        email: Tu correo electrónico
+        cover_letter: Escribe tu carta de presentación
+        submit: Enviar
+        notification: ¿Desea recibir notificaciones de ofertas laborales similares?
       user:
         email: Correo electrónico
         password: Contraseña
@@ -36,7 +42,9 @@ es:
         technologies: Conocimientos técnicos
         job_types: Tipo de trabajo
         email_address: Correo electrónico
-        application_details: Como aplicar? 
+        application_details: Como aplicar?
+        seekers:
+          <<: *seeker_labels
     hints:
       user:
         email: Este será su nombre de usuario
@@ -52,6 +60,8 @@ es:
         job_title: ej. Ingeniero de desarrollo senior Java
         location: Lugar donde se sitúa la oferta laboral, ej. Bogotá, Medellin, Cali, etc.
         technologies: Ingrese los conocimientos técnicos mínimos que debe cumplir el candidato para aplicar a la oferta laboral, ej. Java, Ruby on Rails, .Net, Oracle, etc.
+        seekers:
+          resume: Archivos PDF o Microsoft Word
     placeholders:
       user:
         email: usuario@dominio.com
@@ -59,6 +69,8 @@ es:
         company_logo_url: http://
         company_web_site: http://
         location: Bogotá
+        seekers:
+          <<: *seeker_labels
     # Labels and hints examples
     # labels:
     #   defaults:

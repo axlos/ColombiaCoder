@@ -2,7 +2,7 @@ class JobsController < ApplicationController
   
   include ActionView::Helpers::DateHelper
 
-  before_filter :authenticate_user!, :except => [:show, :index]
+  before_filter :authenticate_user!, :except => [:show, :index, :apply]
 
   # GET /jobs
   def index
@@ -63,8 +63,8 @@ class JobsController < ApplicationController
     @job.expire
     # visualizar mensaje de expiracion
     if Job::EXPIRE == @job.status
-       # TODO: Enviar correo a la empresa de que finalizo la oferta
-       flash[:expire] = "Esta oferta laboral caduco hace #{distance_of_time_in_words(Time.now, @job.created_at)}"
+       # TODO: Enviar correo a la empresa de que finalizo la oferta, solo si la empresa esta enterado
+       flash[:expire] = "<strong>Ups!</strong> esta oferta laboral caduco hace #{distance_of_time_in_words(Time.now, @job.created_at)}".html_safe
     end
   end
 
@@ -115,7 +115,7 @@ class JobsController < ApplicationController
       if params[:preview_button]
         redirect_to :action => 'show', :id => @job.id
       else
-        redirect_to admin_jobs_path(@job.id), notice: 'Oferta laboral creada.'
+        redirect_to admin_jobs_path(@job.id), notice: 'Oferta laboral creada con exito.'
       end
     else
       render action: "new"
@@ -162,6 +162,24 @@ class JobsController < ApplicationController
       redirect_to admin_jobs_url
     else
       render action: "show"
+    end
+  end
+  
+  def apply
+    @job = Job.new(params[:job])
+    @seeker = @job.seekers.first
+    @seeker.job_id = params[:job][:id]
+    
+    if @seeker.save
+      # enviar resume adjunto
+      JobMailer.apply_now(@job, @seeker).deliver
+      redirect_to job_path(@seeker.job_id), notice: "<i class='icon-thumbs-up'></i> Gracias por aplicar a la oferta laboral!".html_safe
+      # guardar cookies de datos de envio
+      cookies.permanent[:name] = @seeker.name
+      cookies.permanent[:email] = @seeker.email
+      cookies.permanent[:cover_letter] = @seeker.cover_letter
+    else
+      redirect_to job_path(@seeker.job_id), alert: "<i class='icon-warning-sign'></i> Por favor, verifique los datos ingresados e intente nuevamente!".html_safe
     end
   end
   

@@ -1,8 +1,27 @@
-<% if flash[:expire] %>
+<% if flash[:expire] or flash[:notice] or flash[:alert] %>
 	<div class="row-fluid">
 		<div class="span12">
-			<div class="alert alert-block">
-				<strong>Ups!</strong> <%= flash[:expire] %>
+			<% if flash[:expire] %>
+				<div class="alert">
+					<%= flash[:expire] %>
+				</div>
+			<% elsif flash[:alert] %>
+				<div class="alert alert-error">
+					<%= flash[:alert] %>
+				</div>
+			<% elsif flash[:notice] %>
+				<div class="alert alert-success">
+					<%= flash[:notice] %>
+				</div>
+			<% end %>
+		</div>
+	</div>
+<% end %>
+<% if flash[:apply] %>
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="alert alert-success">
+				<%= flash[:apply] %>
 			</div>
 		</div>
 	</div>
@@ -94,15 +113,40 @@
 		</div>
 	</div>
 	<% else %>
-		<div class="row-fluid">
-			<div class="span12">
-				<div class="well">
-					<h4>Como aplicar a la oferta laboral</h4>
-					<p>
-						Enviar hoja de vida al correo electronico: <%= job.email_address %>
-					</p>
-				</div>
+		<%= button_tag "Aplicar", :class => 'btn btn-success btn-large', 'data-toggle' => 'modal', 'data-target' => '#modalApply' %>
+		<div id="modalApply" class="modal hide fade">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h3><%= job.job_title %></h3>
+				<h4><%= job.company_name %></h4>
 			</div>
+			<%= simple_form_for job, :url => apply_job_path(job), :method => :post, :html => { :multipart => true } do |f| %>
+				<%= f.input :job_title, :as => :hidden %>
+				<%= f.input :email_address, :as => :hidden %>
+				<%= f.input :id, :as => :hidden %>
+				<%= f.simple_fields_for :seekers, job.seekers.build do |s| %>
+					<div class="modal-body">
+						<p>
+							<%= s.error_notification %>
+							<div class="form-inputs">
+							  	<%= s.input :name, :autofocus => true, :input_html => { :class => 'span12', :value => cookies[:name] }, :label => false, :required => true %>
+								<%= s.input :email, :input_html => { :class => 'span12', :value => cookies[:email] }, :label => false %>
+								<%= s.input :cover_letter, :as => :text, :input_html => { :rows => 5, :class => 'span12', :value => cookies[:cover_letter] }, :label => false %>
+								<div class="alert alert-info">
+									Adjunte su currículum en formato PDF o MS Word
+									<%= s.file_field :resume %>
+								</div>
+								<%= s.input :notification, :wrapper => :inline_checkbox, :as => :boolean %>
+							</div>
+						</p>
+					</div>
+				<% end %>
+				<div class="modal-footer">
+					<%= f.button :submit, 'Enviar', :class => 'btn btn-primary', :name => nil %>
+				</div>
+			<% end %>
 		</div>
 	<% end %>
 <% end %>

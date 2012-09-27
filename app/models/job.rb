@@ -11,8 +11,14 @@ class Job < ActiveRecord::Base
   EXPIRE = 3
   
   belongs_to :user
+  
   has_many :technologies, dependent: :destroy, :inverse_of => :job
+  accepts_nested_attributes_for :technologies, :allow_destroy => true, :reject_if => proc { |attributes| attributes['name'].blank? }
+  
   has_and_belongs_to_many :job_types
+  
+  has_many :seekers, :inverse_of => :job, :class_name => 'Seeker'
+  accepts_nested_attributes_for :seekers
   
   # desactivado adjuntar archivos, logotipo de la empresa
   # has_attached_file :company_logo, :styles => { :medium => ["260x180>", :png], :thumb => ["160x120>", :png] }
@@ -20,9 +26,8 @@ class Job < ActiveRecord::Base
   # validates_attachment :company_logo, :content_type => { :content_type => ['image/jpeg', 'image/png', 'image/gif'] }, :size => { :in => 0..200.kilobytes }
    
   #reject_if evita que se envien tecnolias en blanco
-  accepts_nested_attributes_for :technologies, :allow_destroy => true, :reject_if => proc { |attributes| attributes['name'].blank? }
-
-  attr_accessible :location, :application_details, :company_description, :company_name, :company_web_site, :email_address, :no_experience_required, :job_description, :job_title, :resume_directly, :salary_negotiable, :salary_range_fin, :salary_range_ini, :status, :user_id, :job_type_ids, :technologies_attributes, :technology_ids, :company_logo_url
+ 
+  attr_accessible :location, :application_details, :company_description, :company_name, :company_web_site, :email_address, :no_experience_required, :job_description, :job_title, :resume_directly, :salary_negotiable, :salary_range_fin, :salary_range_ini, :status, :user_id, :job_type_ids, :technologies_attributes, :technology_ids, :company_logo_url, :seekers_attributes
     
   validates :job_title, :length => { :maximum => 80 }
   validates :location, :length => { :maximum => 20 }
@@ -106,7 +111,7 @@ class Job < ActiveRecord::Base
   
   def tweet!
     # Twitter oferta laboral
-    tweet_desc = "#Empleo en @colombiadev #{job_title} en #{location}"
+    tweet_desc = "Nuevo #empleo en #{location}, #{job_title}"
     shrunk_url = Job.tiny_url(134 - tweet_desc.length, "http://www.colombiacoder.com/jobs/#{id}")
     
     if tweet_desc.length > 134 - shrunk_url.length
@@ -121,6 +126,6 @@ class Job < ActiveRecord::Base
     open(string).read.strip
   rescue StandardError => e
     puts "Error in tiny_url: #{e.message}\n#{e.backtrace}"
-  end
+  end 
   
 end
