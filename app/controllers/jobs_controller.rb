@@ -17,7 +17,6 @@ class JobsController < ApplicationController
       fulltext I18n.transliterate params[:job][:location] if params[:job][:location].present? do
         fields(:location)
       end
-      
       # buscar por skills
       fulltext params[:skill] do
         fields(:technologies)

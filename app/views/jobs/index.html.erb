@@ -43,12 +43,17 @@
 			<strong>Buscar ofertas laborales</strong>
 			<br/>
 			<br/>
+			<!-- Tecnologia -->
+			<div class="control-group string required">
+				<div class="controls">
+					<%= text_field_tag 'skill', params[:skill], :class => 'span12', :placeholder=>'ej. Java, Oracle, Web Design' %>
+				</div>
+			</div>
 			<!-- Localizacion -->
-			<%= f.input :location, :input_html => { :class => 'span12' }, :hint => 'ej. Bogotá, Medellin, Cali, etc.' %>
+			<%= f.input :location, :input_html => { :class => 'span12' }, :placeholder => 'ej. Bogotá, Medellin, Cali, etc.', :label => false, :hint => false %>
 
-			<%= f.association :job_types, :as => :check_boxes, :label => 'Tipo de contrato:' %>
+			<%= f.association :job_types, :as => :check_boxes, :label => false %>
 			<!-- Rango salarial -->
-			<hr/>
 			<%= content_tag(:label, 'Salario:')%>
 			<label class="radio">
 				<%= radio_button_tag 'job[salary_negotiable]', true, (params[:job][:salary_negotiable] == 'true') || true %><%= content_tag(:label, 'Negociable', )%>
