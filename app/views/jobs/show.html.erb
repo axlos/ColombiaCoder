@@ -52,6 +52,40 @@
 			<%= render @job %>
 		</div>
 		<div class="span3">
+			<!-- Facebook -->
+			<div id="fb-root"></div>
+				<script>(function(d, s, id) {
+				  var js, fjs = d.getElementsByTagName(s)[0];
+				  if (d.getElementById(id)) return;
+				  js = d.createElement(s); js.id = id;
+				  js.src = "//connect.facebook.net/es_LA/all.js#xfbml=1";
+				  fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk'));
+			</script>
+			<!-- Twittear -->
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+			<div class="alert alert-success">
+				<h4 class="page-header">Comparte la información</h4>
+					<p>
+						<small>¿Conoces a alguien con los conocimientos técnicos?. Comparte la información!</small>
+					</p>
+				<div class="btn-group">
+					<div class="fb-like" data-send="true" data-layout="button_count" data-width="450" data-show-faces="false" data-action="recommend"></div>
+					<div><a href="https://twitter.com/share" class="twitter-share-button" data-text="Se solicitan ingenieros con talento en la industria del software en Colombia" data-lang="es" data-hashtags="empleo">Twittear</a></div>
+					<div class="g-plus" data-action="share"></div>
+				</div>
+			</div>
+			<!-- Google plus -->
+			<script type="text/javascript">
+			  window.___gcfg = {lang: 'es-419'};
+			
+			  (function() {
+			    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			    po.src = 'https://apis.google.com/js/plusone.js';
+			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+			  })();
+			</script>
+			<br/>
 			<script type="text/javascript"><!--
 			google_ad_client = "ca-pub-9287817861975219";
 			/* COLDEV_SHOW */
@@ -63,26 +97,6 @@
 			<script type="text/javascript"
 			src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 			</script>
-			<!-- Redes sociales oferta -->
-			<!--div class="well" style="padding: 8px 0;">
-				<ul class="nav nav-list">
-					<li class="nav-header">
-						Siganos en las redes sociales
-					</li>
-					<li>
-						<a href="#"><i class="icon-twitter"></i> Twittear esta oferta</a>
-					</li>
-					<li>
-						<a href="#"><i class="icon-facebook"></i> Compartir en Facebook</a>
-					</li>
-					<li>
-						<a href="#"><i class="icon-linkedin"></i> Compartir en Linkedin</a>
-					</li>
-					<li>
-						<a href="#"><i class="icon-google-plus"></i> Compartir en Google plus</a>
-					</li>
-				</ul>
-			</div-->
 		</div>
 	</div>
 </div>
