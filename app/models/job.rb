@@ -61,10 +61,7 @@ class Job < ActiveRecord::Base
 
   searchable :auto_index => true, :auto_remove => true do
     # fulltext search location
-    text :location do 
-      I18n.transliterate name
-    end
-    
+    text :location
     text :job_title
     text :job_description
     

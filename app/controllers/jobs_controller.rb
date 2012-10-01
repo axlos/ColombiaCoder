@@ -14,9 +14,10 @@ class JobsController < ApplicationController
     
     search = Job.search do
       # buscar por nombre de Localizacion
-      fulltext params[:job][:location] do
+      fulltext I18n.transliterate params[:job][:location] if params[:job][:location].present? do
         fields(:location)
       end
+      
       # buscar por skills
       fulltext params[:skill] do
         fields(:technologies)
@@ -106,6 +107,8 @@ class JobsController < ApplicationController
     
     # Referenciar el usuario en session
     @job = Job.new(params[:job])
+    # quitar tildes en location
+    @job.location = I18n.transliterate @job.location
     @job.user = current_user
     
     if @job.save
@@ -127,6 +130,9 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
     # editar los skills enviandos como parametros
     params[:job][:technology_ids] = params_skills(params[:job][:technology_ids], @job.id)
+    # quitar tildes en location
+    params[:job][:location] = I18n.transliterate params[:job][:location]
+    
     if @job.update_attributes(params[:job])
       redirect_to @job, notice: 'Oferta laboral actualizada.'
     else
