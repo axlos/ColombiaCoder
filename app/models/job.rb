@@ -61,12 +61,15 @@ class Job < ActiveRecord::Base
 
   searchable :auto_index => true, :auto_remove => true do
     # fulltext search location
-    text :location, :boost => 5
-    text :job_title
+    text :location do 
+      I18n.transliterate name
+    end
+    
+    string :job_title
     text :job_description
     
     # fulltext skills
-    text :technologies, :boost => 5 do
+    text :technologies do
       technologies.map { |skill| skill.name }
     end
     # rangos salariales
