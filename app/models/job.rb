@@ -65,7 +65,7 @@ class Job < ActiveRecord::Base
       I18n.transliterate name
     end
     
-    string :job_title
+    text :job_title
     text :job_description
     
     # fulltext skills
