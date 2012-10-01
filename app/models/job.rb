@@ -47,6 +47,11 @@ class Job < ActiveRecord::Base
   scope :posted, where(status: 2)
   scope :recent, order('created_at desc')
   
+  def self.top_location(limit)
+    # seleccionar las ciudades mas ingresadas y convertir resultado en un map con solo los nombres
+    connection.select_all("select location as location from (select location, count(*) from jobs group by location order by 2 desc limit #{limit}) as location").map(&:values).flatten
+  end
+  
   def resume_directly?
     if self.resume_directly
        self.email_address.blank?

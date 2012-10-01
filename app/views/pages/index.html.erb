@@ -21,6 +21,12 @@
           		link_to skill, jobs_path({:skill => skill})
         		end.to_sentence(:words_connector => ' - ', :last_word_connector => ' - ').html_safe %>
 		</p>
+		<p>
+			<strong>Ciudad: </strong>
+			<%= @presenter.top_location.map do |location|
+          		link_to location, jobs_path({job:{:location => location}})
+        		end.to_sentence(:words_connector => ' - ', :last_word_connector => ' - ').html_safe %>
+		</p>
 		<div class="row-fluid">
 			<div class="span6">
 				<!-- Ofertas de empleo urgentes -->

@@ -16,5 +16,9 @@ class Jobs::IndexPresenter
   def top_skill
     Technology.top_skills(5)
   end
+  
+  def top_location
+    Job.top_location(5)
+  end
 
 end
