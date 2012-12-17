@@ -88,8 +88,8 @@
 						</ul>
 						<% unless user_signed_in? %>
 							<ul class="nav pull-right">
-			                	<%= link_to 'Iniciar sesión', new_user_session_path, :class => 'btn btn-link btn-small' %>
-								<%= link_to 'Crear una cuenta', new_user_registration_path, :class => 'btn btn-small btn-info' %>
+			                	<%= link_to 'Iniciar sesión', new_user_session_path, :class => 'btn btn-small btn-small' %>
+								<%= link_to 'Crear una cuenta', new_user_registration_path, :class => 'btn btn-small btn-success' %>
 							</ul>
 						<% end %>
 						<% if user_signed_in? %>

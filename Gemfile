@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails'
-gem 'heroku'
+#gem 'heroku'
 gem 'taps'
 
 # Bundle edge Rails instead:

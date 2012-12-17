@@ -8,20 +8,20 @@
 	<legend>
 		Información de la empresa
 	</legend>
-	<%= f.input :company_name, :input_html => { :class => 'span12' } %>
+	<%= f.input :company_name, :input_html => { :class => 'span12', :required => true } %>
 	<%= f.input :company_web_site, :input_html => { :class => 'span12' } %>
 	<%= f.input :company_logo_url, :input_html => { :class => 'span12' } %>
-	<%= f.input :company_description, :input_html => { :class => 'span12', :rows => 7 } %>
+	<%= f.input :company_description, :input_html => { :class => 'span12', :rows => 7, :required => true } %>
 </fieldset>
 <fieldset>
 	<legend>
 		Información de la oferta laboral
 	</legend>
-	<%= f.input :job_title, :input_html => { :class => 'span12', :maxlength => 80 } %>
+	<%= f.input :job_title, :input_html => { :class => 'span12', :maxlength => 80, :required => true } %>
 
-	<%= f.input :location, :input_html => { :class => 'span12', :maxlength => 20} %>
+	<%= f.input :location, :input_html => { :class => 'span12', :maxlength => 20, :required => true } %>
 
-	<%= f.input :job_description, :input_html => { :class => 'span12', :rows => 7 } %>
+	<%= f.input :job_description, :input_html => { :class => 'span12', :rows => 7, :required => true } %>
 	
 	<div class="control-group select optional">
 		<label class="select optional control-label" for="job_technology_ids">Conocimientos técnicos</label>
