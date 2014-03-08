@@ -9,6 +9,6 @@ class User < ActiveRecord::Base
   
   accepts_nested_attributes_for :contact
   
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :contact_attributes
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :contact_attributes, :type
   
 end

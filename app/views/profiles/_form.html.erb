@@ -1,0 +1,20 @@
+<%= simple_form_for @profile, :validate => true, :html => { :class => 'form-horizontal well' }  do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :full_name, :input_html => { :class => 'span12', :required => true } %>
+    <%= f.input :professional_headline, :input_html => { :class => 'span12', :required => true } %>
+    <%= f.input :experience, :input_html => { :class => 'span1 input-mini', :required => true, :type => 'number', :size => 2, :min => 0, :max => 99 } %>
+    <%= f.input :summary, :input_html => { :class => 'span12', :required => true, :rows => 7 } %>
+	<div class="control-group select optional">
+		<label class="select optional control-label" for="profile_technology_ids">Conocimientos técnicos</label>
+		<div class="controls">
+			<%= f.select :technology_ids, @profile.technologies.collect {|x| [x.name, x.id]}, {}, :multiple => true, :class => 'span12' %>
+			<p class="help-block">Ingrese sus conocimientos técnicos. ENTER para agregar una habilidad.</p>
+		</div>
+	</div>
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

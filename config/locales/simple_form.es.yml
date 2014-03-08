@@ -31,6 +31,11 @@ es:
         street_address: Dirección
         web_site: Sitio web
         location: Ciudad
+      profile:
+        experience: Experiencia (años)
+        full_name: Nombre completo
+        professional_headline: Título profesional
+        summary: Perfil
       job:
         company_name: Empresa
         company_web_site: Sitio web
@@ -50,6 +55,8 @@ es:
         email: Este será su nombre de usuario
         password: Al menos 7 caracteres, por favor
         current_password: Contraseña actual
+      profile:
+        professional_headline: ej. Arquitecto de aplicaciones SOA, Desarrollador de software senior, Administrador Base de Datos.
       contact:
         web_site: ej. http://www.colombiacoder.com
         location: ej. Bogotá, Medellin, Cali, etc.

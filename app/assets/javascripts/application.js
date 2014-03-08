@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.ui.slider
 //= require jquery.ui.autocomplete
+//= require jquery.ui.progressbar
 //= require jquery.formatCurrency-1.4.0.min
 //= require bootstrap-wysihtml5-all
 //= require twitter/bootstrap

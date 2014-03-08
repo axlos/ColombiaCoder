@@ -134,7 +134,7 @@
 								<%= s.input :email, :input_html => { :class => 'span12', :value => cookies[:email] }, :label => false %>
 								<%= s.input :cover_letter, :as => :text, :input_html => { :rows => 5, :class => 'span12', :value => cookies[:cover_letter] }, :label => false %>
 								<div class="alert alert-info">
-									Adjunte su currículum en formato PDF o MS Word
+									Adjunte su currículum en formato <span class="badge badge-important">PDF</span> o <span class="badge badge-info">MS Word</span>
 									<%= s.file_field :resume %>
 								</div>
 								<%= s.input :notification, :wrapper => :inline_checkbox, :as => :boolean %>
@@ -143,7 +143,7 @@
 					</div>
 				<% end %>
 				<div class="modal-footer">
-					<%= f.button :submit, 'Enviar', :class => 'btn btn-primary', :name => nil %>
+					<%= f.button :submit, 'Enviar', :class => 'btn btn-info', :name => nil %>
 				</div>
 			<% end %>
 		</div>

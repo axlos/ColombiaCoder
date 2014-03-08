@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Full name:</b>
+  <%= @profile.full_name %>
+</p>
+
+<p>
+  <b>Summary:</b>
+  <%= @profile.summary %>
+</p>
+
+<p>
+  <b>Professional headline:</b>
+  <%= @profile.professional_headline %>
+</p>
+
+<p>
+  <b>Experience:</b>
+  <%= @profile.experience %>
+</p>
+
+
+<%= link_to 'Edit', edit_profile_path(@profile) %> |
+<%= link_to 'Back', profiles_path %>

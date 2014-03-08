@@ -27,7 +27,8 @@ class Job < ActiveRecord::Base
    
   #reject_if evita que se envien tecnolias en blanco
  
-  attr_accessible :location, :application_details, :company_description, :company_name, :company_web_site, :email_address, :no_experience_required, :job_description, :job_title, :resume_directly, :salary_negotiable, :salary_range_fin, :salary_range_ini, :status, :user_id, :job_type_ids, :technologies_attributes, :technology_ids, :company_logo_url, :seekers_attributes
+  attr_accessible :location, :application_details, :company_description, :company_name, :company_web_site, :email_address, :no_experience_required, :job_description, 
+  :job_title, :resume_directly, :salary_negotiable, :salary_range_fin, :salary_range_ini, :status, :user_id, :job_type_ids, :technologies_attributes, :technology_ids, :company_logo_url, :seekers_attributes
     
   validates :job_title, :length => { :maximum => 80 }
   validates :location, :length => { :maximum => 20 }

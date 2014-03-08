@@ -73,7 +73,7 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
   end
   
-  # GET /jobs/new@job = session[:job_params]
+  # GET /jobs/new
   def new
     @job = Job.new
     
@@ -101,7 +101,7 @@ class JobsController < ApplicationController
   def create
     # guardar los skills en una variable temporal
     array_skills = Array.new(params[:job][:technology_ids])
-    # borrar los skills enviados como parametros
+    # borrar los skills enviados como parametros para que no se guarden al crear la oferta
     params[:job][:technology_ids].clear
     
     # Referenciar el usuario en session
@@ -111,8 +111,8 @@ class JobsController < ApplicationController
     @job.user = current_user
     
     if @job.save
-      # asociar los skills a el job creado 
-      params_skills(array_skills, @job.id)
+      # asociar los skills al job creado 
+      Technology.params_skills(array_skills, @job.id, 1)
       # Previsualizar la oferta de empleo
       if params[:preview_button]
         redirect_to :action => 'show', :id => @job.id
@@ -128,7 +128,7 @@ class JobsController < ApplicationController
   def update
     @job = Job.find(params[:id])
     # editar los skills enviandos como parametros
-    params[:job][:technology_ids] = params_skills(params[:job][:technology_ids], @job.id)
+    params[:job][:technology_ids] = Technology.params_skills(params[:job][:technology_ids], @job.id, 1)
     # quitar tildes en location
     params[:job][:location] = I18n.transliterate params[:job][:location]
     
@@ -152,7 +152,7 @@ class JobsController < ApplicationController
     job = update_status(params[:id], 2)
     if job
       # Twitter oferta laboral
-      job.tweet!
+      #job.tweet!
       # redireccionar oferta laboral
       redirect_to admin_jobs_url
     else
@@ -196,27 +196,5 @@ class JobsController < ApplicationController
     # retornar oferta laboral
     @job
   end
-  
-  def params_skills(params_skills, job_id)
-    skills_ids = Array.new
-    skills_new = Array.new
-          
-    params_skills.each do |skill|
-      unless skill.empty?      
-        # verificar que no sea un id, si es un string es por que no existe la tecnologia
-        if skill.numeric?
-          # guardar el id de skill en un arreglo temporal
-          skills_ids << skill
-        else
-          skills_new << Technology.find_or_create_by_job_id_and_name(job_id, skill).id
-        end
-      end
-    end
 
-    # borrar todos los parametros enviados para las tecnologias    
-    params_skills.clear
-    # retornar los skills creados y referenciados a los existentes
-    skills_ids = skills_ids | skills_new
-  end
-  
 end

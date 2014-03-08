@@ -13,7 +13,23 @@ class RegistrationsController < Devise::RegistrationsController
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
         sign_in(resource_name, resource)
-        respond_with resource, :location => after_sign_up_path_for(resource)
+        # determinar si existe la session temporal para guadar el perfil, para redireccionar a guardar perfil
+        if session[:profile].present?
+          # obtener profile de session
+          profile = session[:profile]
+          # guardar el perfil
+          if profile.save
+            # borrar variable en session
+            session[:profile] = nil
+            # redireccionar a lista de perfiles
+            redirect_to profiles_path, notice: 'Ups! en estos momentos no podemos registrar su perfil, intente mas tarde.'
+          else
+            # redireccionar a lista de perfiles
+            redirect_to profiles_path, notice: 'Su perfil fue creado satisfactoriamente.'
+          end
+        else
+          respond_with resource, :location => after_sign_up_path_for(resource) unless session[:profile].present?
+        end
       else
         set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_navigational_format?
         expire_session_data_after_sign_in!

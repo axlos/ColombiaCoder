@@ -27,16 +27,18 @@ end
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', :platforms => :ruby
-gem 'twitter-bootstrap-rails'
+gem 'twitter-bootstrap-rails', '~> 2.2.0'
 gem 'client_side_validations'
 gem 'simple_form'
 gem 'bootstrap-wysihtml5-rails'
-gem 'jquery-ui-rails'
+gem "jquery-ui-rails", "~> 3.0.1"
 gem 'jquery-rails', '~> 2.1'
 # Authentication
 gem 'devise'
 # Sunspot is a Ruby library for expressive, powerful interaction with the Solr search engine. 
 gem 'sunspot_rails'
+# barra de progreso en consola
+gem 'progress_bar'
 # twitter API
 gem 'twitter'
 

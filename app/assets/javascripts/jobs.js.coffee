@@ -17,18 +17,18 @@ $("[name='job[resume_directly]']").bind 'click', (event) =>
 # Aplicar JQuery-UI lider
 $("#slider_range").slider({
       range: true,
-      min: 1000000,
-      max: 10000000,
+      min: 1500000,
+      max: 8000000,
       step: 500000,
       values: [$("#job_salary_range_ini").val(), $("#job_salary_range_fin").val()],
       slide: (event, ui ) ->
         # Visualizar los rangos salariales en los label
-        if ui.values[0] <= (1000000)
-          $("#range_ini").text('Menos $1,000,000')
+        if ui.values[0] <= (1500000)
+          $("#range_ini").text('Menos de $1,500,000')
         else
           $("#range_ini").text(ui.values[0]).formatCurrency({roundToDecimalPlace: 0})
-        if ui.values[1] >= (10000000)
-          $("#range_fin").text('Mas $10,000,000')
+        if ui.values[1] >= (8000000)
+          $("#range_fin").text('Mas de $8,000,000')
         else
           $("#range_fin").text(ui.values[1]).formatCurrency({roundToDecimalPlace: 0})
         
