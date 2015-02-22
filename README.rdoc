@@ -1,3 +1,5 @@
 == Welcome to ColombiaCoder
 
-ColombiaCoder is such a small test project to find jobs, Companies can sing up and then they can publish a specific job positions. Purpose on this site is oriented just for techical people who whant to find new positions
+Colombia Code is such a small test project to find jobs, Companies can sign up and then they will be able to publish specific job positions.
+
+The purpose on this site is oriented just for people who want to find technical positions
