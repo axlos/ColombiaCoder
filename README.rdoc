@@ -1,3 +1,5 @@
+Notice: This project has been deprecated, and will no longer be maintained.
+
 == Welcome to ColombiaCoder
 
 Colombia Code is such a small test project to find jobs, Companies can sign up and then they will be able to publish specific job positions.
