@@ -1,7 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'rails'
-gem 'heroku'
+ruby '1.9.3'
+
+# Gems required in all environments
+gem 'rails', '3.2.8'
+
 gem 'taps'
 
 # Bundle edge Rails instead:
@@ -29,7 +32,8 @@ end
 gem 'therubyracer', :platforms => :ruby
 gem 'twitter-bootstrap-rails', '~> 2.2.0'
 gem 'client_side_validations'
-gem 'simple_form'
+gem 'client_side_validations-simple_form'
+gem 'simple_form', '~> 2.1.2'
 gem 'bootstrap-wysihtml5-rails'
 gem "jquery-ui-rails", "~> 3.0.1"
 gem 'jquery-rails', '~> 2.1'
@@ -40,7 +44,7 @@ gem 'sunspot_rails'
 # barra de progreso en consola
 gem 'progress_bar'
 # twitter API
-gem 'twitter'
+gem 'twitter', '~> 5.14.0'
 
 # Para subir archivos
 gem 'paperclip', '3.2.0'

@@ -19,6 +19,7 @@
 //= require bootstrap-wysihtml5-all
 //= require twitter/bootstrap
 //= require rails.validations
+//= require rails.validations.simple_form
 //= requiere abstract-chosen
 //= requiere chosen.jquery
 //= requiere ajax-chosen
