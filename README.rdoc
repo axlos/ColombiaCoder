@@ -1,4 +1,4 @@
-Notice: This project has been deprecated, and will no longer be maintained.
+*Notice: This project has been deprecated, and will no longer be maintained.*
 
 == Welcome to ColombiaCoder
 
